@@ -45,17 +45,3 @@ public struct Movie: Codable, Identifiable, Equatable, Sendable {
         )
     }
 }
-
-public struct MovieResponse: Decodable, Equatable, Sendable {
-    public let page: Int
-    public let results: [Movie]
-    public let totalPages: Int
-    public let totalResults: Int
-    
-    enum CodingKeys: String, CodingKey {
-        case page
-        case results
-        case totalPages = "total_pages"
-        case totalResults = "total_results"
-    }
-}

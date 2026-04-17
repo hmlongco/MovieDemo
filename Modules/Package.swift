@@ -64,7 +64,7 @@ let package = Package(
             ]
         ),
         .testTarget(
-            name: "Tests",
+            name: "ModulesTests",
             dependencies: [
                 "App"
             ],
