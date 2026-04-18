@@ -12,34 +12,34 @@ public class MovieService: MovieServices {
     }
     
     public func getPopularMovies(page: Int = 1) async throws -> MovieResponse {
-        return try await client.request(MoviesEndpoint.getPopularMovies(page: page))
+        return try await client.request(TMDBEndpoint.getPopularMovies(page: page))
     }
     
     public func getTopRatedMovies(page: Int = 1) async throws -> MovieResponse {
-        return try await client.request(MoviesEndpoint.getTopRated(page: page))
+        return try await client.request(TMDBEndpoint.getTopRated(page: page))
     }
     
     public func getNowPlayingMovies(page: Int = 1) async throws -> MovieResponse {
-        return try await client.request(MoviesEndpoint.getNowPlaying(page: page))
+        return try await client.request(TMDBEndpoint.getNowPlaying(page: page))
     }
     
     public func getMovieDetails(id: Int) async throws -> MovieDetail {
-        return try await client.request(MoviesEndpoint.getMovieDetails(id: id))
+        return try await client.request(TMDBEndpoint.getMovieDetails(id: id))
     }
     
     public func getMovieCredits(id: Int) async throws -> CreditsResponse {
-        return try await client.request(MoviesEndpoint.getMovieCredits(id: id))
+        return try await client.request(TMDBEndpoint.getMovieCredits(id: id))
     }
     
     public func getGenres() async throws -> GenreResponse {
-        return try await client.request(MoviesEndpoint.getGenres)
+        return try await client.request(TMDBEndpoint.getGenres)
     }
     
     public func discoverMovies(page: Int, genreId: Int?) async throws -> MovieResponse {
-        return try await client.request(MoviesEndpoint.discover(page: page, genreId: genreId))
+        return try await client.request(TMDBEndpoint.discover(page: page, genreId: genreId))
     }
     
     public func searchMovies(query: String, page: Int = 1) async throws -> MovieResponse {
-        return try await client.request(MoviesEndpoint.search(query: query, page: page))
+        return try await client.request(TMDBEndpoint.search(query: query, page: page))
     }
 }

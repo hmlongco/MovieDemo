@@ -1,6 +1,6 @@
 import Foundation
 
-public enum MoviesEndpoint: Endpoint {
+public enum TMDBEndpoint: Endpoint {
     case getPopularMovies(page: Int)
     case getTopRated(page: Int)
     case getNowPlaying(page: Int)

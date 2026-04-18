@@ -2,7 +2,7 @@ import FactoryKit
 
 extension Container {
 
-    public var networkClient: Factory<NetworkClient> {
+    public var movieClient: Factory<NetworkClient> {
         self {
             NetworkClient(
                 configuration: NetworkConfiguration(baseURL: TMDBConfiguration.baseURL),
@@ -17,7 +17,7 @@ extension Container {
 
     @MainActor
     public var movieService: Factory<MovieServices> {
-        self { MovieService(client: self.networkClient()) }
+        self { MovieService(client: self.movieClient()) }
             .singleton
     }
 
