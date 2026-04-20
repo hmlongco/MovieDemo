@@ -1,6 +1,10 @@
 import Foundation
 
-public final class RequestBuilder {
+public protocol RequestBuilding{
+    func build(from endpoint: Endpoint) throws -> URLRequest
+}
+
+public final class RequestBuilder: RequestBuilding {
     private let configuration: NetworkConfiguration
     
     public init(configuration: NetworkConfiguration) {
@@ -32,17 +36,17 @@ public final class RequestBuilder {
         var request = URLRequest(url: url)
         request.httpMethod = endpoint.method.rawValue
         
-        // 3. Add Headers
-        // Default headers
+        // 3. Add Default headers
         configuration.defaultHeaders.forEach { key, value in
             request.setValue(value, forHTTPHeaderField: key)
         }
-        // Endpoint specific headers
+
+        // 4. Add Endpoint specific headers
         endpoint.headers?.forEach { key, value in
             request.setValue(value, forHTTPHeaderField: key)
         }
         
-        // 4. Encode Body
+        // 5. Add Body
         if let body = endpoint.body {
             do {
                 request.httpBody = body

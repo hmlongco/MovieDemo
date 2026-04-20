@@ -7,12 +7,13 @@ import SwiftUI
 
 public struct AppView: View {
 
-    @State private var appNav = AppNavigator()
+    @Environment(\.appDependencies) private var appDependencies
+    @Environment(\.appNav) private var appNav
 
     public init() {}
 
     public var body: some View {
-        TabView(selection: $appNav.selectedTab) {
+        TabView(selection: Bindable(appNav).selectedTab) {
             HomeTab()
                 .tabItem { Label("Home",    systemImage: "house") }
                 .tag(AppTab.home)
@@ -27,7 +28,8 @@ public struct AppView: View {
         }
         .tint(.white)
         .preferredColorScheme(.dark)
-        .environment(appNav)
+        .environment(\.movieDependencies, appDependencies)
+        .environment(\.profileDependencies, appDependencies)
     }
 }
 

@@ -12,6 +12,10 @@ final class HomeUpcomingViewModel {
     @ObservationIgnored
     @Injected(\.movieRepository) private var service
 
+    init(service: MovieServices) {
+        self.service = service
+    }
+
     func load() {
         state = .loading
         Task {

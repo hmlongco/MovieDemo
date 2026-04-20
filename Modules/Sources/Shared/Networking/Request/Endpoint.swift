@@ -1,6 +1,6 @@
 import Foundation
 
-public protocol Endpoint: Sendable {
+public protocol Endpoint: Identifiable, Sendable {
     /// The path to be appended to the base URL (e.g., "/users")
     var path: String { get }
     
@@ -19,6 +19,9 @@ public protocol Endpoint: Sendable {
 
 // Default implementation for convenience
 public extension Endpoint {
+    var id: String {
+        method.rawValue + path
+    }
     var headers: [String: String]? {
         return nil
     }

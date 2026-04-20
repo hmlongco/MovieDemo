@@ -10,3 +10,7 @@ enum AppTab: Int {
 final class AppNavigator {
     var selectedTab: AppTab = .home
 }
+
+extension EnvironmentValues {
+    @Entry var appNav: AppNavigator = .init()
+}

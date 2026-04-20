@@ -20,6 +20,15 @@
       }
     },
     {
+      "identity" : "requestbuilder",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/hmlongco/RequestBuilder",
+      "state" : {
+        "branch" : "main",
+        "revision" : "b06b709438153925efe3010f5a8b300edb321a1d"
+      }
+    },
+    {
       "identity" : "runes",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/hmlongco/Runes",

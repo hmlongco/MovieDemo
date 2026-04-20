@@ -1,7 +1,6 @@
 import FactoryKit
 
 extension Container {
-
     public var movieClient: Factory<NetworkClient> {
         self {
             NetworkClient(
@@ -16,6 +15,11 @@ extension Container {
     }
 
     @MainActor
+    public var requestBuilder: Factory<RequestBuilding> {
+
+    }
+
+    @MainActor
     public var movieService: Factory<MovieServices> {
         self { MovieService(client: self.movieClient()) }
             .singleton
@@ -23,7 +27,7 @@ extension Container {
 
     @MainActor
     public var movieRepository: Factory<MovieServices> {
-        self { MovieRepository() }
+        self { MovieRepository(service: self.movieService()) }
             .singleton
     }
 }

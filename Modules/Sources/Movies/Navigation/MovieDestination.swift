@@ -9,7 +9,19 @@ public enum MovieDestination: NavigationDestination {
     case search
 
     public var body: some View {
-        switch self {
+        MovieDestinationView(destination: self)
+    }
+
+}
+
+struct MovieDestinationView: View {
+
+    @Environment(\.movieDependencies) var movieDependencies
+
+    let destination: MovieDestination
+
+    var body: some View {
+        switch destination {
         case .movieDetail(let movieId):
             MovieDetailView(movieId: movieId)
 

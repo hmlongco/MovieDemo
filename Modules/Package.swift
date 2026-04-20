@@ -12,6 +12,7 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/hmlongco/Factory", branch: "develop"),
         .package(url: "https://github.com/hmlongco/Navigator", branch: "main"),
+        .package(url: "https://github.com/hmlongco/RequestBuilder", branch: "main"),
         .package(url: "https://github.com/hmlongco/Runes", branch: "main"),
         .package(url: "https://github.com/apple/swift-async-algorithms", from: "1.0.0"),
         .package(url: "https://github.com/apple/swift-collections.git", from: "1.1.4"),
@@ -60,6 +61,7 @@ let package = Package(
             name: "Shared",
             dependencies: [
                 .product(name: "FactoryKit", package: "Factory"),
+                .product(name: "RequestBuilder", package: "RequestBuilder"),
                 .product(name: "Runes", package: "Runes"),
             ]
         ),
