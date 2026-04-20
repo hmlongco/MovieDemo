@@ -4,10 +4,7 @@ import Foundation
 public class MovieService: MovieServices {
     private let client: NetworkClient
     
-    public init(client: NetworkClient = .init(
-        configuration: NetworkConfiguration(baseURL: TMDBConfiguration.baseURL),
-        interceptors: [TMDBRequestInterceptor(), LoggerInterceptor()])
-    ) {
+    public init(client: NetworkClient) {
         self.client = client
     }
     

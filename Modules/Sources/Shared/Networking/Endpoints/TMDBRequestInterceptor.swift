@@ -3,8 +3,8 @@ import Foundation
 public struct TMDBRequestInterceptor: RequestInterceptor {
     private let apiKey: String
     
-    public init(apiKey: String = TMDBConfiguration.apiKey) {
-        self.apiKey = apiKey
+    public init(apiKey: String?) {
+        self.apiKey = apiKey ?? "mock-api-key"
     }
     
     public func adapt(_ request: URLRequest) async throws -> URLRequest {
