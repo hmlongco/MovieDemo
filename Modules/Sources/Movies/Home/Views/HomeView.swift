@@ -6,7 +6,6 @@ import Shared
 public struct HomeView: View {
 
     @Environment(\.navigator)       private var navigator
-//    @Environment(AppNavigator.self) private var appNav
 
     @State private var scrollOffset: CGFloat = 0
     @State private var refreshID:    Int     = 0
@@ -55,22 +54,7 @@ public struct HomeView: View {
         .refreshable { refreshID += 1 }
         .background(Color(hex: "0A0A0A").ignoresSafeArea())
         .ignoresSafeArea(edges: .top)
-//        .toolbar { homeNavBar }
     }
-
-    // MARK: - Navigation Bar
-
-//    private var homeNavBar: some ToolbarContent {
-//        ToolbarItem(placement: .topBarTrailing) {
-//            Button {
-//                appNav.selectedTab = .explore
-//            } label: {
-//                Image(systemName: "magnifyingglass")
-//                    .foregroundStyle(.white)
-//                    .font(.system(size: 18))
-//            }
-//        }
-//    }
 
     // MARK: - Navigation
 

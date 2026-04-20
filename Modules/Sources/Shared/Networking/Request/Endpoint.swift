@@ -11,8 +11,8 @@ public protocol Endpoint: Sendable {
     var headers: [String: String]? { get }
     
     /// Optional body data to be encoded as JSON
-    var body: Encodable? { get }
-    
+    var body: Data? { get }
+
     /// Optional query parameters
     var queryItems: [String: String]? { get }
 }
@@ -22,7 +22,7 @@ public extension Endpoint {
     var headers: [String: String]? {
         return nil
     }
-    var body: Encodable? {
+    var body: Data? {
         return nil
     }
     var queryItems: [String: String]? {

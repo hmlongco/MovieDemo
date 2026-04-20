@@ -45,11 +45,7 @@ public final class RequestBuilder {
         // 4. Encode Body
         if let body = endpoint.body {
             do {
-                let encoder = JSONEncoder()
-                // Useful for debugging, formatting output
-                // encoder.outputFormatting = .prettyPrinted
-                let data = try encoder.encode(body)
-                request.httpBody = data
+                request.httpBody = body
                 request.setValue("application/json", forHTTPHeaderField: "Content-Type")
             } catch {
                 throw NetworkError.serializationError(error)

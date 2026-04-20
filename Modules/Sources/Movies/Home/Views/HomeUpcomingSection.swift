@@ -23,7 +23,9 @@ struct HomeUpcomingSection: View {
             UpcomingCard(movie: movie)
                 .frame(width: 280)
         }
-        .task(id: refreshID) { viewModel.load() }
+        .task(id: refreshID) {
+            viewModel.load()
+        }
     }
 }
 
