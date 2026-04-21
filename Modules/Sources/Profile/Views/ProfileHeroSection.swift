@@ -1,6 +1,14 @@
+import Shared
 import SwiftUI
 
 struct ProfileHeroSection: View {
+    let user: User
+
+    private var memberSinceText: String {
+        let year = Calendar.current.component(.year, from: user.membershipDate)
+        return "@\(user.userName) • Member since \(year)"
+    }
+
     var body: some View {
         VStack(spacing: 16) {
             Image(systemName: "person.crop.circle.fill")
@@ -10,10 +18,10 @@ struct ProfileHeroSection: View {
                 .foregroundStyle(.gray)
 
             VStack(spacing: 4) {
-                Text("Alex Morgan")
+                Text(user.fullName)
                     .foregroundStyle(.white)
                     .font(.system(size: 18, weight: .medium))
-                Text("@alexmorgan • Member since 2023")
+                Text(memberSinceText)
                     .foregroundStyle(Color(hex: "737373"))
                     .font(.system(size: 12))
             }

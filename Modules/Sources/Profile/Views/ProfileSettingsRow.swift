@@ -5,7 +5,8 @@ struct ProfileSettingsRow: View {
     let title:      String
     var titleColor: Color = Color(hex: "E5E5E5")
     var iconColor:  Color = Color(hex: "A3A3A3")
-    let isLast:     Bool
+    var isButton:   Bool = false
+    var isLast:     Bool = false
 
     var body: some View {
         VStack(spacing: 0) {
@@ -17,9 +18,11 @@ struct ProfileSettingsRow: View {
                     .foregroundStyle(titleColor)
                     .font(.system(size: 14, weight: .medium))
                 Spacer()
-                Image(systemName: "chevron.right")
-                    .foregroundStyle(Color(hex: "525252"))
-                    .font(.system(size: 12))
+                if !isButton {
+                    Image(systemName: "chevron.right")
+                        .foregroundStyle(Color(hex: "525252"))
+                        .font(.system(size: 12))
+                }
             }
             .padding(16)
             .contentShape(Rectangle())

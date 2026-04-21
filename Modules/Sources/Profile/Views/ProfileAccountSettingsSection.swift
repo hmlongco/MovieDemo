@@ -2,6 +2,8 @@ import SwiftUI
 import NavigatorUI
 
 struct ProfileAccountSettingsSection: View {
+    let onLogout: () -> Void
+
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text("ACCOUNT")
@@ -11,17 +13,18 @@ struct ProfileAccountSettingsSection: View {
 
             VStack(spacing: 0) {
                 NavigationLink(to: ProfileDestination.paymentMethods) {
-                    ProfileSettingsRow(icon: "creditcard", title: "Payment Methods", isLast: false)
+                    ProfileSettingsRow(icon: "creditcard", title: "Payment Methods")
                 }
                 NavigationLink(to: ProfileDestination.security) {
-                    ProfileSettingsRow(icon: "exclamationmark.shield", title: "Security", isLast: false)
+                    ProfileSettingsRow(icon: "exclamationmark.shield", title: "Security")
                 }
-                NavigationLink(to: ProfileDestination.logOut) {
+                Button(action: onLogout) {
                     ProfileSettingsRow(
                         icon:       "rectangle.portrait.and.arrow.right",
                         title:      "Log Out",
                         titleColor: Color(hex: "f43f5e"),
                         iconColor:  Color(hex: "f43f5e").opacity(0.8),
+                        isButton:   true,
                         isLast:     true
                     )
                 }

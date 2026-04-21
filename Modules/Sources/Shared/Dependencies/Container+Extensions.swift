@@ -2,6 +2,12 @@ import FactoryKit
 
 extension Container {
 
+    @MainActor
+    public var authenticationService: Factory<AuthenticationServices> {
+        self { AuthenticationService() }
+            .singleton
+    }
+
     public var movieApiKey: Factory<String?> {
         promised()
     }
