@@ -1,6 +1,6 @@
 import Foundation
 
-public protocol Endpoint: Sendable {
+public protocol Endpoint: Identifiable, Sendable {
     /// The path to be appended to the base URL (e.g., "/users")
     var path: String { get }
     
@@ -15,10 +15,16 @@ public protocol Endpoint: Sendable {
 
     /// Optional query parameters
     var queryItems: [String: String]? { get }
+
+    /// Decoder
+    var decoder: JSONDecoder { get }
 }
 
 // Default implementation for convenience
 public extension Endpoint {
+    var id: String {
+        "\(method): \(path)"
+    }
     var headers: [String: String]? {
         return nil
     }
@@ -27,5 +33,8 @@ public extension Endpoint {
     }
     var queryItems: [String: String]? {
         return nil
+    }
+    var decoder: JSONDecoder {
+        JSONDecoder()
     }
 }
