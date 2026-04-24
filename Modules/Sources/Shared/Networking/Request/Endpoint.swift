@@ -25,15 +25,19 @@ public extension Endpoint {
     var id: String {
         "\(method): \(path)"
     }
+
     var headers: [String: String]? {
         return nil
     }
+
     var body: Data? {
+
         return nil
     }
     var queryItems: [String: String]? {
         return nil
     }
+    
     var decoder: JSONDecoder {
         JSONDecoder()
     }

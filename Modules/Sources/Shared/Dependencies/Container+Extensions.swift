@@ -14,11 +14,10 @@ extension Container {
 
     public var movieClient: Factory<NetworkClient> {
         self {
-            NetworkClient(
+            StandardNetworkClient(
                 configuration: NetworkConfiguration(baseURL: TMDBConfiguration.baseURL),
                 interceptors: [
-                    TMDBRequestInterceptor(apiKey: self.movieApiKey()),
-                    LoggerInterceptor()
+                    TMDBRequestInterceptor(apiKey: self.movieApiKey())
                 ]
             )
         }

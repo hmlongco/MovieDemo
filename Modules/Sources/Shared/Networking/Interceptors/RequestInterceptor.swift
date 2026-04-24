@@ -2,7 +2,7 @@ import Foundation
 
 public protocol RequestInterceptor: Sendable {
     func adapt(_ request: URLRequest) async throws -> URLRequest
-    // Future: func retry(...)
+
 }
 
 // Default implementation
