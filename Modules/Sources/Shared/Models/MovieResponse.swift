@@ -20,3 +20,16 @@ public struct MovieResponse: Decodable, Equatable, Sendable {
         case totalResults = "total_results"
     }
 }
+
+#if DEBUG
+public extension MovieResponse {
+    static var mock: MovieResponse {
+        MovieResponse(
+            page: 1,
+            results: [.mock1, .mock2, .mock3, .mock4, .mock5, .mock6],
+            totalPages: 10,
+            totalResults: 200
+        )
+    }
+}
+#endif

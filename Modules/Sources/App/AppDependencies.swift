@@ -10,7 +10,8 @@ import Shared
 
 extension Container: AutoRegistering {
     public func autoRegister() {
-        // WARNING: Add your own TMDB API key
-        movieApiKey.register { "a614703b8c5616c90136e6ae854cc593" }
+        // WARNING: Add your own TMDB Authorization API key
+        movieApiKey.register { "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhNjE0NzAzYjhjNTYxNmM5MDEzNmU2YWU4NTRjYzU5MyIsIm5iZiI6MTc3NjcxMjE1Mi43OTYsInN1YiI6IjY5ZTY3OWQ4NjQzYjdlYmUwZjA2NDYxMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.2urBrtjWlhX-IaDT6aySvTWwEmHjbIsk36jfA8-TkIQ"
+        }
     }
 }

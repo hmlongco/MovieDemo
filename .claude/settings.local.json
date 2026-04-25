@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find /Users/michael/Dropbox/Projects/iOS/OSS/MovieDemo/Modules/Sources/Shared -name \"*.swift\" -type f -exec grep -l \"extension.*{\" {} \\\\;)",
+      "Bash(swift build *)"
+    ]
+  }
+}

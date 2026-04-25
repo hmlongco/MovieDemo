@@ -31,18 +31,8 @@ public final class RequestBuilder {
         // 2. Create Request
         var request = URLRequest(url: url)
         request.httpMethod = endpoint.method.rawValue
-        
-        // 3. Add Headers
-        // Default headers
-        configuration.defaultHeaders.forEach { key, value in
-            request.setValue(value, forHTTPHeaderField: key)
-        }
-        // Endpoint specific headers
-        endpoint.headers?.forEach { key, value in
-            request.setValue(value, forHTTPHeaderField: key)
-        }
-        
-        // 4. Encode Body
+
+        // 3. Encode Body
         if let body = endpoint.body {
             do {
                 request.httpBody = body
@@ -51,7 +41,18 @@ public final class RequestBuilder {
                 throw NetworkError.serializationError(error)
             }
         }
+
+        // 4. Add Headers
+        // Default headers
+        configuration.defaultHeaders.forEach { key, value in
+            request.setValue(value, forHTTPHeaderField: key)
+        }
         
+        // Endpoint specific headers
+        endpoint.headers?.forEach { key, value in
+            request.setValue(value, forHTTPHeaderField: key)
+        }
+
         return request
     }
 }

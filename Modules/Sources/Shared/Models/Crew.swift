@@ -20,3 +20,14 @@ public struct Crew: Decodable, Identifiable, Equatable, Sendable {
         case department
     }
 }
+
+#if DEBUG
+public extension Crew {
+    static var mock1: Crew {
+        Crew(id: 525, name: "Christopher Nolan", job: "Director", department: "Directing")
+    }
+    static var mock2: Crew {
+        Crew(id: 525, name: "Christopher Nolan", job: "Director", department: "Directing")
+    }
+}
+#endif

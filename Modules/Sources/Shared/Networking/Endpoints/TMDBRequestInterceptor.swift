@@ -9,18 +9,9 @@ public struct TMDBRequestInterceptor: RequestInterceptor {
     
     public func adapt(_ request: URLRequest) async throws -> URLRequest {
         var request = request
-        guard let url = request.url else { return request }
-        
-        // Append api_key query parameter
-        var components = URLComponents(url: url, resolvingAgainstBaseURL: false)
-        var queryItems = components?.queryItems ?? []
-        queryItems.append(URLQueryItem(name: "api_key", value: apiKey))
-        components?.queryItems = queryItems
-        
-        if let newURL = components?.url {
-            request.url = newURL
-        }
-        
+        var headers = request.allHTTPHeaderFields ?? [:]
+        headers["Authorization"] = "Bearer \(apiKey)"
+        request.allHTTPHeaderFields = headers
         return request
     }
 }
