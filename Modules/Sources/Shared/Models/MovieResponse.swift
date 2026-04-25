@@ -23,7 +23,7 @@ public struct MovieResponse: Decodable, Equatable, Sendable {
 
 #if DEBUG
 public extension MovieResponse {
-    static var mock: MovieResponse {
+    static var mock1: MovieResponse {
         MovieResponse(
             page: 1,
             results: [.mock1, .mock2, .mock3, .mock4, .mock5, .mock6],

@@ -26,7 +26,7 @@ public extension Genre {
 }
 
 public extension GenreResponse {
-    static var mock: GenreResponse {
+    static var mock1: GenreResponse {
         GenreResponse(genres: [
             Genre(id: 28, name: "Action"),
             Genre(id: 878, name: "Science Fiction"),

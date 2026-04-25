@@ -1,3 +1,4 @@
+import FactoryKit
 import SwiftUI
 import NavigatorUI
 import Runes
@@ -128,7 +129,7 @@ public struct ExploreView: View {
                         ForEach(movies) { movie in
                             SearchResultRow(movie: movie)
                                 .onTapGesture {
-                                    navigator.navigate(to: MovieDestination.movieDetail(movieId: String(movie.id)))
+                                    navigator.navigate(to: MovieDestination.movieDetail(movieId: movie.id))
                                 }
                             Divider().background(Color.white.opacity(0.07))
                         }
@@ -182,7 +183,7 @@ public struct ExploreView: View {
                     ForEach(viewModel.collections) { collection in
                         ExploreCollectionCard(collection: collection)
                             .onTapGesture {
-                                navigator.navigate(to: MovieDestination.movieDetail(movieId: collection.id))
+                                navigator.navigate(to: MovieDestination.movieDetail(movieId: Int(collection.id) ?? 0))
                             }
                     }
                 }
@@ -201,7 +202,7 @@ public struct ExploreView: View {
                 ForEach(viewModel.arrivals) { arrival in
                     ExploreArrivalRow(arrival: arrival)
                         .onTapGesture {
-                            navigator.navigate(to: MovieDestination.movieDetail(movieId: arrival.id))
+                            navigator.navigate(to: MovieDestination.movieDetail(movieId: Int(arrival.id) ?? 0))
                         }
                     Divider().background(Color.white.opacity(0.07))
                 }
@@ -359,3 +360,10 @@ private struct ExploreArrivalRow: View {
         .contentShape(Rectangle())
     }
 }
+
+#if DEBUG
+#Preview {
+    Container.shared.setupMovieMocks()
+    ExploreView()
+}
+#endif

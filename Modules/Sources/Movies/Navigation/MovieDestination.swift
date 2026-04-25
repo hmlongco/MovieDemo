@@ -4,7 +4,7 @@ import NavigatorUI
 
 public enum MovieDestination: NavigationDestination {
 
-    case movieDetail(movieId: String)
+    case movieDetail(movieId: Int)
     case movieList(title: String, sectionTypeRaw: String, genreId: Int?, genreName: String?, allGenres: [Genre]?)
     case search
 

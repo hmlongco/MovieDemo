@@ -1,3 +1,4 @@
+import FactoryKit
 import SwiftUI
 import NavigatorUI
 import Runes
@@ -59,7 +60,7 @@ public struct HomeView: View {
     // MARK: - Navigation
 
     private func navigateToDetail(movie: Movie) {
-        navigator.navigate(to: MovieDestination.movieDetail(movieId: String(movie.id)))
+        navigator.navigate(to: MovieDestination.movieDetail(movieId: movie.id))
     }
 
     private func navigateToList(section: HomeSection, genre: Genre? = nil) {
@@ -89,3 +90,11 @@ private struct HomeScrollOffsetKey: PreferenceKey {
         value = nextValue()
     }
 }
+
+
+#if DEBUG
+#Preview {
+    Container.shared.setupMovieMocks()
+    HomeView()
+}
+#endif

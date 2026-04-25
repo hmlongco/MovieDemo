@@ -2,15 +2,15 @@ import Foundation
 
 public typealias NetworkResult = Decodable & Sendable
 
-public protocol NetworkClient: Actor {
+public protocol NetworkClient: Sendable {
     func request(_ endpoint: Endpoint) async throws -> (Data?, HTTPURLResponse?)
     func request<T: NetworkResult>(_ endpoint: Endpoint) async throws -> T
 
-    func mock(_ endpoint: any Endpoint, data: Data) async
-    func mock<T: NetworkResult>(_ endpoint: any Endpoint, response: T) async
+    func mock(_ endpoint: any Endpoint, data: Data)
+    func mock<T: NetworkResult>(_ endpoint: any Endpoint, value: T)
     func mock<E: Error>(_ endpoint: any Endpoint, error: E)
 
-    func reset(_ endpoint: any Endpoint) async
+    func reset(_ endpoint: any Endpoint)
     func resetAll() async
 }
 

@@ -59,7 +59,7 @@ struct MovieListView: View {
                     ForEach(viewModel.movies) { movie in
                         MovieGridCell(movie: movie)
                             .onTapGesture {
-                                navigator.navigate(to: MovieDestination.movieDetail(movieId: String(movie.id)))
+                                navigator.navigate(to: MovieDestination.movieDetail(movieId: movie.id))
                             }
                             .onAppear {
                                 if movie.id == viewModel.movies.last?.id {

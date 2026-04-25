@@ -1,11 +1,12 @@
-import SwiftUI
+import FactoryKit
 import NavigatorUI
 import Runes
 import Shared
+import SwiftUI
 
 struct MovieDetailView: View {
 
-    let movieId: String
+    let movieId: Int
     @State private var viewModel = MovieDetailViewModel()
     @Environment(\.navigator) private var navigator
 
@@ -33,9 +34,7 @@ struct MovieDetailView: View {
         .scrollIndicators(.hidden)
         .ignoresSafeArea(edges: .top)
         .task {
-            if let id = Int(movieId) {
-                viewModel.load(movieId: id)
-            }
+            viewModel.load(movieId: movieId)
         }
     }
 
@@ -56,7 +55,7 @@ struct MovieDetailView: View {
                 startPoint: .top,
                 endPoint: .bottom
             )
-            .frame(height: 200)
+            .frame(height: 100)
         }
     }
 
@@ -172,7 +171,7 @@ struct MovieDetailView: View {
                     ForEach(movies.prefix(10)) { movie in
                         SimilarMovieCard(movie: movie)
                             .onTapGesture {
-                                navigator.navigate(to: MovieDestination.movieDetail(movieId: String(movie.id)))
+                                navigator.navigate(to: MovieDestination.movieDetail(movieId: movie.id))
                             }
                     }
                 }
@@ -246,3 +245,10 @@ private struct ScrollOffsetKey: PreferenceKey {
         value = nextValue()
     }
 }
+
+#if DEBUG
+#Preview {
+    Container.shared.setupMovieMocks()
+    MovieDetailView(movieId: 1)
+}
+#endif

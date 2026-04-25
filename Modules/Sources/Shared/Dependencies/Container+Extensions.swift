@@ -1,4 +1,5 @@
 import FactoryKit
+import SwiftUI
 
 extension Container {
 
@@ -36,3 +37,20 @@ extension Container {
             .singleton
     }
 }
+
+#if DEBUG
+extension Container {
+    @discardableResult
+    public func setupMovieMocks() -> some View{
+        movieClient().mock(TMDBEndpoint.getPopularMovies(page: 1), value: MovieResponse.mock1)
+        movieClient().mock(TMDBEndpoint.getTopRated(page: 1), value: MovieResponse.mock1)
+        movieClient().mock(TMDBEndpoint.getNowPlaying(page: 1), value: MovieResponse.mock1)
+        movieClient().mock(TMDBEndpoint.getMovieDetails(id: 1), value: MovieDetail.mock1)
+        movieClient().mock(TMDBEndpoint.getMovieCredits(id: 1), value: CreditsResponse.mock1)
+        movieClient().mock(TMDBEndpoint.getGenres, value: GenreResponse.mock1)
+        movieClient().mock(TMDBEndpoint.discover(page: 1, genreId: nil), value: MovieResponse.mock1)
+        movieClient().mock(TMDBEndpoint.search(query: "", page: 1), value: MovieResponse.mock1)
+        return EmptyView()
+    }
+}
+#endif

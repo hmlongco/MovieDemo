@@ -7,12 +7,12 @@
 
 import Foundation
 
-public actor StandardNetworkClient: NetworkClient {
+public final class StandardNetworkClient: NetworkClient, @unchecked Sendable {
     private let session: URLSession
     private let requestBuilder: RequestBuilder
-    private var interceptors: [RequestInterceptor]
+    private let interceptors: [RequestInterceptor]
+    private let verbosity: NetworkClientVerbosity
     private var registry: [String: Any] = [:]
-    private var verbosity: NetworkClientVerbosity
 
     public init(
         configuration: NetworkConfiguration = .default,
@@ -23,10 +23,6 @@ public actor StandardNetworkClient: NetworkClient {
         self.requestBuilder = RequestBuilder(configuration: configuration)
         self.interceptors = interceptors
         self.verbosity = configuration.verbosity
-    }
-
-    public func addInterceptor(_ interceptor: RequestInterceptor) {
-        interceptors.append(interceptor)
     }
 
     // MARK: - Request
@@ -108,8 +104,8 @@ public actor StandardNetworkClient: NetworkClient {
         registry[endpoint.id] = json.data(using: .utf8)
     }
 
-    public func mock<T: NetworkResult>(_ endpoint: any Endpoint, response: T) {
-        registry[endpoint.id] = response
+    public func mock<T: NetworkResult>(_ endpoint: any Endpoint, value: T) {
+        registry[endpoint.id] = value
     }
 
     public func mock<E: Error>(_ endpoint: any Endpoint, error: E) {
