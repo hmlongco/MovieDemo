@@ -5,3 +5,10 @@ struct ProfileLogOutView: View {
         ProfileStubView(title: "Log Out", icon: "rectangle.portrait.and.arrow.right")
     }
 }
+
+#if DEBUG
+#Preview {
+    ProfileLogOutView()
+        .preferredColorScheme(.dark)
+}
+#endif

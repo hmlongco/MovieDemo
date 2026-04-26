@@ -36,3 +36,14 @@ struct ProfileAccountSettingsSection: View {
         }
     }
 }
+
+#if DEBUG
+#Preview {
+    ManagedNavigationStack {
+        ProfileAccountSettingsSection(onLogout: {})
+            .padding(20)
+            .background(Color(hex: "0A0A0A"))
+    }
+    .preferredColorScheme(.dark)
+}
+#endif

@@ -1,3 +1,4 @@
+import NavigatorUI
 import Shared
 import SwiftUI
 
@@ -56,3 +57,15 @@ private struct ProfileStatBox: View {
         .overlay(RoundedRectangle(cornerRadius: 12).stroke(Color.white.opacity(0.05), lineWidth: 1))
     }
 }
+
+#if DEBUG
+#Preview {
+    ManagedNavigationStack {
+        ProfileHeroSection(user: .mock)
+        Spacer()
+    }
+    .padding(20)
+    .background(Color(hex: "0A0A0A"))
+    .preferredColorScheme(.dark)
+}
+#endif

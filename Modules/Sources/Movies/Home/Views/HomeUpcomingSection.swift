@@ -1,3 +1,4 @@
+import FactoryKit
 import SwiftUI
 import Runes
 import Shared
@@ -59,3 +60,18 @@ private struct UpcomingCard: View {
         }
     }
 }
+
+#if DEBUG
+#Preview {
+    Container.shared.setupMovieMocks()
+    HomeUpcomingSection(refreshID: 1, onSeeAll: { }, onMovieTap: { _ in })
+        .preferredColorScheme(.dark)
+}
+
+#Preview {
+    Container.shared.setupMovieMocks()
+    UpcomingCard(movie: .mock1)
+        .containerRelativeFrame(.horizontal) { w, _ in w * 0.5 }
+        .preferredColorScheme(.dark)
+}
+#endif

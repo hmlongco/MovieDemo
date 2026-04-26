@@ -8,13 +8,13 @@ let package = Package(
     platforms: [.iOS(.v17), .macOS(.v13)],
     products: [
         .library(name: "App", targets: ["App"]),
+        .library(name: "MoviesApp", targets: ["MoviesApp"]),
+        .library(name: "ProfileApp", targets: ["ProfileApp"]),
     ],
     dependencies: [
         .package(url: "https://github.com/hmlongco/Factory", branch: "develop"),
         .package(url: "https://github.com/hmlongco/Navigator", branch: "main"),
         .package(url: "https://github.com/hmlongco/Runes", branch: "main"),
-        .package(url: "https://github.com/apple/swift-async-algorithms", from: "1.0.0"),
-        .package(url: "https://github.com/apple/swift-collections.git", from: "1.1.4"),
     ],
     targets: [
         .target(
@@ -27,8 +27,30 @@ let package = Package(
                 .product(name: "FactoryKit", package: "Factory"),
                 .product(name: "NavigatorUI", package: "Navigator"),
                 .product(name: "Runes", package: "Runes"),
-                .product(name: "AsyncAlgorithms", package: "swift-async-algorithms"),
-                .product(name: "Collections", package: "swift-collections"),
+            ]
+            //            resources: [.process("Resources")],
+        ),
+        .target(
+            name: "MoviesApp",
+            dependencies: [
+                "DesignSystem",
+                "Movies",
+                "Shared",
+                .product(name: "FactoryKit", package: "Factory"),
+                .product(name: "NavigatorUI", package: "Navigator"),
+                .product(name: "Runes", package: "Runes"),
+            ]
+            //            resources: [.process("Resources")],
+        ),
+        .target(
+            name: "ProfileApp",
+            dependencies: [
+                "DesignSystem",
+                "Profile",
+                "Shared",
+                .product(name: "FactoryKit", package: "Factory"),
+                .product(name: "NavigatorUI", package: "Navigator"),
+                .product(name: "Runes", package: "Runes"),
             ]
             //            resources: [.process("Resources")],
         ),

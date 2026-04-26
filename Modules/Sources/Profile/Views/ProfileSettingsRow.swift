@@ -34,3 +34,26 @@ struct ProfileSettingsRow: View {
         }
     }
 }
+
+#if DEBUG
+#Preview {
+    VStack(spacing: 0) {
+        ProfileSettingsRow(icon: "arrow.down.circle", title: "Downloads")
+        ProfileSettingsRow(icon: "bell", title: "Notifications")
+        ProfileSettingsRow(icon: "moon", title: "Dark Mode", isLast: true)
+        ProfileSettingsRow(
+            icon: "rectangle.portrait.and.arrow.right",
+            title: "Log Out",
+            titleColor: Color(hex: "f43f5e"),
+            iconColor: Color(hex: "f43f5e").opacity(0.8),
+            isButton: true,
+            isLast: true
+        )
+    }
+    .background(Color.white.opacity(0.03))
+    .cornerRadius(16)
+    .padding(20)
+    .background(Color(hex: "0A0A0A"))
+    .preferredColorScheme(.dark)
+}
+#endif

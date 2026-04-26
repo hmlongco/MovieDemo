@@ -33,3 +33,12 @@ struct ProfilePremiumBanner: View {
         .overlay(RoundedRectangle(cornerRadius: 12).stroke(Color(hex: "6366f1").opacity(0.2), lineWidth: 1))
     }
 }
+
+#if DEBUG
+#Preview {
+    ProfilePremiumBanner()
+        .padding(20)
+        .background(Color(hex: "0A0A0A"))
+        .preferredColorScheme(.dark)
+}
+#endif

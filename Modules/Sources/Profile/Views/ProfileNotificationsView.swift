@@ -5,3 +5,10 @@ struct ProfileNotificationsView: View {
         ProfileStubView(title: "Notifications", icon: "bell")
     }
 }
+
+#if DEBUG
+#Preview {
+    ProfileNotificationsView()
+        .preferredColorScheme(.dark)
+}
+#endif

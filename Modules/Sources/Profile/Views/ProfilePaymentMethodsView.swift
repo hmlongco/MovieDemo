@@ -5,3 +5,10 @@ struct ProfilePaymentMethodsView: View {
         ProfileStubView(title: "Payment Methods", icon: "creditcard")
     }
 }
+
+#if DEBUG
+#Preview {
+    ProfilePaymentMethodsView()
+        .preferredColorScheme(.dark)
+}
+#endif

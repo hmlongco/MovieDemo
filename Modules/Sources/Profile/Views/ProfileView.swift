@@ -1,4 +1,5 @@
 import Runes
+import NavigatorUI
 import Shared
 import SwiftUI
 
@@ -27,3 +28,14 @@ public struct ProfileView: View {
         .scrollIndicators(.hidden)
     }
 }
+
+#if DEBUG
+#Preview {
+    ManagedNavigationStack {
+        ProfileView()
+    }
+    .preferredColorScheme(.dark)
+}
+#endif
+
+

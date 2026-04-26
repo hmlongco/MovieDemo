@@ -1,3 +1,4 @@
+import FactoryKit
 import SwiftUI
 import NavigatorUI
 import Runes
@@ -93,3 +94,15 @@ private struct HeroCard: View {
         .clipped()
     }
 }
+
+#if DEBUG
+#Preview {
+    Container.shared.setupMovieMocks()
+    VStack {
+        HomeHeroSection(refreshID: 1, onMovieTap: { _ in })
+            .preferredColorScheme(.dark)
+        Spacer()
+    }
+    .ignoresSafeArea(.all)
+}
+#endif

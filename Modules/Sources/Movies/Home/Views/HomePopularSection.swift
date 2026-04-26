@@ -1,3 +1,4 @@
+import FactoryKit
 import SwiftUI
 import Runes
 import Shared
@@ -49,3 +50,11 @@ private struct PosterCard: View {
         }
     }
 }
+
+#if DEBUG
+#Preview {
+    Container.shared.setupMovieMocks()
+    HomePopularSection(refreshID: 1, onSeeAll: {}, onMovieTap: { _ in })
+        .preferredColorScheme(.dark)
+}
+#endif

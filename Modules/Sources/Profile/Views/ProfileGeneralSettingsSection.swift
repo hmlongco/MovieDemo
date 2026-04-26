@@ -27,3 +27,14 @@ struct ProfileGeneralSettingsSection: View {
         }
     }
 }
+
+#if DEBUG
+#Preview {
+    ManagedNavigationStack {
+        ProfileGeneralSettingsSection()
+            .padding(20)
+            .background(Color(hex: "0A0A0A"))
+    }
+    .preferredColorScheme(.dark)
+}
+#endif

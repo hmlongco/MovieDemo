@@ -17,3 +17,10 @@ struct ProfileStubView: View {
         .background(Color(hex: "0A0A0A").ignoresSafeArea())
     }
 }
+
+#if DEBUG
+#Preview {
+    ProfileStubView(title: "Downloads", icon: "arrow.down.circle")
+        .preferredColorScheme(.dark)
+}
+#endif

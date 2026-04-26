@@ -1,3 +1,4 @@
+import FactoryKit
 import SwiftUI
 import Runes
 import Shared
@@ -90,3 +91,11 @@ private struct TopRatedRow: View {
         .contentShape(Rectangle())
     }
 }
+
+#if DEBUG
+#Preview {
+    Container.shared.setupMovieMocks()
+    HomeTopRatedSection(refreshID: 1, onMovieTap: { _ in })
+        .preferredColorScheme(.dark)
+}
+#endif

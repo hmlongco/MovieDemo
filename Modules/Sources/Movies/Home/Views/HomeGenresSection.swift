@@ -1,3 +1,4 @@
+import FactoryKit
 import SwiftUI
 import Runes
 import Shared
@@ -62,3 +63,11 @@ private struct GenreChipButton: View {
         }
     }
 }
+
+#if DEBUG
+#Preview {
+    Container.shared.setupMovieMocks()
+    HomeGenresSection(refreshID: 1, onGenreTap: { _ in }, onGenresLoaded: { _ in })
+        .preferredColorScheme(.dark)
+}
+#endif

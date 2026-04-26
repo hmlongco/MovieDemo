@@ -5,3 +5,10 @@ struct ProfileSecurityView: View {
         ProfileStubView(title: "Security", icon: "exclamationmark.shield")
     }
 }
+
+#if DEBUG
+#Preview {
+    ProfileSecurityView()
+        .preferredColorScheme(.dark)
+}
+#endif
