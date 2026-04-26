@@ -1,6 +1,5 @@
 import Movies
 import NavigatorUI
-import Profile
 import Runes
 import Shared
 import SwiftUI

@@ -1,0 +1,33 @@
+{
+  "originHash" : "cacbda2e3a545ba5796f18d7d0636bacc49aec66e591e332660c3ac8dbd4937c",
+  "pins" : [
+    {
+      "identity" : "factory",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/hmlongco/Factory",
+      "state" : {
+        "branch" : "develop",
+        "revision" : "de824a0dd356ff35a8696e90ddea6f050cff53a5"
+      }
+    },
+    {
+      "identity" : "navigator",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/hmlongco/Navigator",
+      "state" : {
+        "branch" : "main",
+        "revision" : "509fd4c65f031f582d536f3fe3f18698ecb11fdb"
+      }
+    },
+    {
+      "identity" : "runes",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/hmlongco/Runes",
+      "state" : {
+        "branch" : "main",
+        "revision" : "9f358f36bada836b0dcde5b36cb0826a4f3c8dce"
+      }
+    }
+  ],
+  "version" : 3
+}

@@ -7,122 +7,114 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4CD6F8D22F9E88C700F138A1 /* ProfileApp in Frameworks */ = {isa = PBXBuildFile; productRef = 4CD6F8D12F9E88C700F138A1 /* ProfileApp */; };
+		4CD6F8EC2F9E8C8500F138A1 /* MoviesApp in Frameworks */ = {isa = PBXBuildFile; productRef = 4CD6F8EB2F9E8C8500F138A1 /* MoviesApp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4CD6F8B12F9E837A00F138A1 /* ProfilePlayground.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProfilePlayground.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4CD6F8DC2F9E8C3C00F138A1 /* MoviesPlayground.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoviesPlayground.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		4CD6F8B32F9E837A00F138A1 /* ProfilePlayground */ = {
+		4CD6F8DE2F9E8C3C00F138A1 /* MoviesPlayground */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = ProfilePlayground;
+			path = MoviesPlayground;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		4CD6F8AE2F9E837A00F138A1 /* Frameworks */ = {
+		4CD6F8D92F9E8C3C00F138A1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4CD6F8D22F9E88C700F138A1 /* ProfileApp in Frameworks */,
+				4CD6F8EC2F9E8C8500F138A1 /* MoviesApp in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4CD6F8A82F9E837A00F138A1 = {
+		4CD6F8D32F9E8C3C00F138A1 = {
 			isa = PBXGroup;
 			children = (
-				4CD6F8B32F9E837A00F138A1 /* ProfilePlayground */,
-				4CD6F8D02F9E88C700F138A1 /* Frameworks */,
-				4CD6F8B22F9E837A00F138A1 /* Products */,
+				4CD6F8DE2F9E8C3C00F138A1 /* MoviesPlayground */,
+				4CD6F8DD2F9E8C3C00F138A1 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		4CD6F8B22F9E837A00F138A1 /* Products */ = {
+		4CD6F8DD2F9E8C3C00F138A1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4CD6F8B12F9E837A00F138A1 /* ProfilePlayground.app */,
+				4CD6F8DC2F9E8C3C00F138A1 /* MoviesPlayground.app */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		4CD6F8D02F9E88C700F138A1 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		4CD6F8B02F9E837A00F138A1 /* ProfilePlayground */ = {
+		4CD6F8DB2F9E8C3C00F138A1 /* MoviesPlayground */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4CD6F8BC2F9E837C00F138A1 /* Build configuration list for PBXNativeTarget "ProfilePlayground" */;
+			buildConfigurationList = 4CD6F8E72F9E8C3D00F138A1 /* Build configuration list for PBXNativeTarget "MoviesPlayground" */;
 			buildPhases = (
-				4CD6F8AD2F9E837A00F138A1 /* Sources */,
-				4CD6F8AE2F9E837A00F138A1 /* Frameworks */,
-				4CD6F8AF2F9E837A00F138A1 /* Resources */,
+				4CD6F8D82F9E8C3C00F138A1 /* Sources */,
+				4CD6F8D92F9E8C3C00F138A1 /* Frameworks */,
+				4CD6F8DA2F9E8C3C00F138A1 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				4CD6F8B32F9E837A00F138A1 /* ProfilePlayground */,
+				4CD6F8DE2F9E8C3C00F138A1 /* MoviesPlayground */,
 			);
-			name = ProfilePlayground;
+			name = MoviesPlayground;
 			packageProductDependencies = (
-				4CD6F8D12F9E88C700F138A1 /* ProfileApp */,
+				4CD6F8EB2F9E8C8500F138A1 /* MoviesApp */,
 			);
-			productName = ProfilePlayground;
-			productReference = 4CD6F8B12F9E837A00F138A1 /* ProfilePlayground.app */;
+			productName = MoviesPlayground;
+			productReference = 4CD6F8DC2F9E8C3C00F138A1 /* MoviesPlayground.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		4CD6F8A92F9E837A00F138A1 /* Project object */ = {
+		4CD6F8D42F9E8C3C00F138A1 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 2630;
 				LastUpgradeCheck = 2630;
 				TargetAttributes = {
-					4CD6F8B02F9E837A00F138A1 = {
+					4CD6F8DB2F9E8C3C00F138A1 = {
 						CreatedOnToolsVersion = 26.3;
 					};
 				};
 			};
-			buildConfigurationList = 4CD6F8AC2F9E837A00F138A1 /* Build configuration list for PBXProject "ProfilePlayground" */;
+			buildConfigurationList = 4CD6F8D72F9E8C3C00F138A1 /* Build configuration list for PBXProject "MoviesPlayground" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
 			);
-			mainGroup = 4CD6F8A82F9E837A00F138A1;
+			mainGroup = 4CD6F8D32F9E8C3C00F138A1;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				4CD6F8BF2F9E843100F138A1 /* XCLocalSwiftPackageReference "../../Modules" */,
+				4CD6F8EA2F9E8C8500F138A1 /* XCLocalSwiftPackageReference "../../Modules" */,
 			);
 			preferredProjectObjectVersion = 77;
-			productRefGroup = 4CD6F8B22F9E837A00F138A1 /* Products */;
+			productRefGroup = 4CD6F8DD2F9E8C3C00F138A1 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4CD6F8B02F9E837A00F138A1 /* ProfilePlayground */,
+				4CD6F8DB2F9E8C3C00F138A1 /* MoviesPlayground */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		4CD6F8AF2F9E837A00F138A1 /* Resources */ = {
+		4CD6F8DA2F9E8C3C00F138A1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -132,7 +124,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		4CD6F8AD2F9E837A00F138A1 /* Sources */ = {
+		4CD6F8D82F9E8C3C00F138A1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -142,7 +134,7 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		4CD6F8BA2F9E837C00F138A1 /* Debug */ = {
+		4CD6F8E52F9E8C3D00F138A1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -206,7 +198,7 @@
 			};
 			name = Debug;
 		};
-		4CD6F8BB2F9E837C00F138A1 /* Release */ = {
+		4CD6F8E62F9E8C3D00F138A1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -263,7 +255,7 @@
 			};
 			name = Release;
 		};
-		4CD6F8BD2F9E837C00F138A1 /* Debug */ = {
+		4CD6F8E82F9E8C3D00F138A1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -284,7 +276,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.hmlong.ProfilePlayground;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hmlong.MoviesPlayground;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -296,7 +288,7 @@
 			};
 			name = Debug;
 		};
-		4CD6F8BE2F9E837C00F138A1 /* Release */ = {
+		4CD6F8E92F9E8C3D00F138A1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -317,7 +309,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.hmlong.ProfilePlayground;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hmlong.MoviesPlayground;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -332,20 +324,20 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4CD6F8AC2F9E837A00F138A1 /* Build configuration list for PBXProject "ProfilePlayground" */ = {
+		4CD6F8D72F9E8C3C00F138A1 /* Build configuration list for PBXProject "MoviesPlayground" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4CD6F8BA2F9E837C00F138A1 /* Debug */,
-				4CD6F8BB2F9E837C00F138A1 /* Release */,
+				4CD6F8E52F9E8C3D00F138A1 /* Debug */,
+				4CD6F8E62F9E8C3D00F138A1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4CD6F8BC2F9E837C00F138A1 /* Build configuration list for PBXNativeTarget "ProfilePlayground" */ = {
+		4CD6F8E72F9E8C3D00F138A1 /* Build configuration list for PBXNativeTarget "MoviesPlayground" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4CD6F8BD2F9E837C00F138A1 /* Debug */,
-				4CD6F8BE2F9E837C00F138A1 /* Release */,
+				4CD6F8E82F9E8C3D00F138A1 /* Debug */,
+				4CD6F8E92F9E8C3D00F138A1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -353,19 +345,18 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		4CD6F8BF2F9E843100F138A1 /* XCLocalSwiftPackageReference "../../Modules" */ = {
+		4CD6F8EA2F9E8C8500F138A1 /* XCLocalSwiftPackageReference "../../Modules" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ../../Modules;
 		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		4CD6F8D12F9E88C700F138A1 /* ProfileApp */ = {
+		4CD6F8EB2F9E8C8500F138A1 /* MoviesApp */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4CD6F8BF2F9E843100F138A1 /* XCLocalSwiftPackageReference "../../Modules" */;
-			productName = ProfileApp;
+			productName = MoviesApp;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
-	rootObject = 4CD6F8A92F9E837A00F138A1 /* Project object */;
+	rootObject = 4CD6F8D42F9E8C3C00F138A1 /* Project object */;
 }
