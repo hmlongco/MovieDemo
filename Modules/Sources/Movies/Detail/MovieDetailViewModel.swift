@@ -13,20 +13,18 @@ final class MovieDetailViewModel {
     @ObservationIgnored
     @Injected(\.movieRepository) private var service
 
-    func load(movieId: Int) {
+    func load(movieId: Int) async {
         detailState = .loading
         castsState  = .loading
-        Task {
-            async let detailTask  = service.getMovieDetails(id: movieId)
-            async let creditsTask = service.getMovieCredits(id: movieId)
-            do {
-                let (detail, credits) = try await (detailTask, creditsTask)
-                detailState = .loaded(detail)
-                castsState  = .loaded(credits.cast)
-            } catch {
-                detailState = .error(error.localizedDescription)
-                castsState  = .error(error.localizedDescription)
-            }
+        async let detailTask  = service.getMovieDetails(id: movieId)
+        async let creditsTask = service.getMovieCredits(id: movieId)
+        do {
+            let (detail, credits) = try await (detailTask, creditsTask)
+            detailState = .loaded(detail)
+            castsState  = .loaded(credits.cast)
+        } catch {
+            detailState = .error(error.localizedDescription)
+            castsState  = .error(error.localizedDescription)
         }
     }
 }

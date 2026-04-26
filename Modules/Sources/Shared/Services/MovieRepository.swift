@@ -31,6 +31,10 @@ public final class MovieRepository: MovieServices {
 
     @Injected(\.movieService) private var service
 
+    // MARK: - Lifecycle
+
+    public init() {}
+
     // MARK: - MovieServiceProtocol
 
     public func getPopularMovies(page: Int) async throws -> MovieResponse {

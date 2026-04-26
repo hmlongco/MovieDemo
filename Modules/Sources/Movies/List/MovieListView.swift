@@ -20,7 +20,7 @@ struct MovieListView: View {
         .background(Color(hex: "0A0A0A").ignoresSafeArea())
         .navigationTitle(viewModel.title)
         .task {
-            viewModel.initialLoad()
+            await viewModel.initialLoad()
         }
     }
 

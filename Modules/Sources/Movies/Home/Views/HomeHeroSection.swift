@@ -40,7 +40,7 @@ struct HomeHeroSection: View {
                 .shimmer()
             }
         }
-        .task(id: refreshID) { viewModel.load() }
+        .task(id: refreshID) { await viewModel.load() }
     }
 }
 

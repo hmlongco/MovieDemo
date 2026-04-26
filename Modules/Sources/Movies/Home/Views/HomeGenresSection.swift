@@ -39,7 +39,7 @@ struct HomeGenresSection: View {
             }
         }
         .padding(.top, 24)
-        .task(id: refreshID) { viewModel.load() }
+        .task(id: refreshID) { await viewModel.load() }
         .onChange(of: viewModel.currentGenres) { _, genres in
             onGenresLoaded(genres)
         }

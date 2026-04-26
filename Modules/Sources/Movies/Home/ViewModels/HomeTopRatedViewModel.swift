@@ -12,15 +12,13 @@ final class HomeTopRatedViewModel {
     @ObservationIgnored
     @Injected(\.movieRepository) private var service
 
-    func load() {
+    func load() async {
         state = .loading
-        Task {
-            do {
-                let result = try await service.getTopRatedMovies(page: 1)
-                state = .loaded(result.results)
-            } catch {
-                state = .loaded([])
-            }
+        do {
+            let result = try await service.getTopRatedMovies(page: 1)
+            state = .loaded(result.results)
+        } catch {
+            state = .loaded([])
         }
     }
 }

@@ -34,7 +34,7 @@ struct MovieDetailView: View {
         .scrollIndicators(.hidden)
         .ignoresSafeArea(edges: .top)
         .task {
-            viewModel.load(movieId: movieId)
+            await viewModel.load(movieId: movieId)
         }
     }
 

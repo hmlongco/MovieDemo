@@ -41,7 +41,7 @@ extension Container {
 #if DEBUG
 extension Container {
     @discardableResult
-    public func setupMovieMocks() -> some View{
+    public func setupMovieMocks() -> some View {
         movieClient().mock(TMDBEndpoint.getPopularMovies(page: 1), value: MovieResponse.mock1)
         movieClient().mock(TMDBEndpoint.getTopRated(page: 1), value: MovieResponse.mock1)
         movieClient().mock(TMDBEndpoint.getNowPlaying(page: 1), value: MovieResponse.mock1)
@@ -50,6 +50,19 @@ extension Container {
         movieClient().mock(TMDBEndpoint.getGenres, value: GenreResponse.mock1)
         movieClient().mock(TMDBEndpoint.discover(page: 1, genreId: nil), value: MovieResponse.mock1)
         movieClient().mock(TMDBEndpoint.search(query: "", page: 1), value: MovieResponse.mock1)
+        return EmptyView()
+    }
+
+    @discardableResult
+    public func setupMovieErrors(_ error: NetworkError = .serverError(statusCode: 503, data: nil)) -> some View {
+        movieClient().mock(TMDBEndpoint.getPopularMovies(page: 1), error: error)
+        movieClient().mock(TMDBEndpoint.getTopRated(page: 1), error: error)
+        movieClient().mock(TMDBEndpoint.getNowPlaying(page: 1), error: error)
+        movieClient().mock(TMDBEndpoint.getMovieDetails(id: 1), error: error)
+        movieClient().mock(TMDBEndpoint.getMovieCredits(id: 1), error: error)
+        movieClient().mock(TMDBEndpoint.getGenres, error: error)
+        movieClient().mock(TMDBEndpoint.discover(page: 1, genreId: nil), error: error)
+        movieClient().mock(TMDBEndpoint.search(query: "", page: 1), error: error)
         return EmptyView()
     }
 }

@@ -24,7 +24,7 @@ struct HomePopularSection: View {
             PosterCard(movie: movie)
                 .frame(width: 128)
         }
-        .task(id: refreshID) { viewModel.load() }
+        .task(id: refreshID) { await viewModel.load() }
     }
 }
 

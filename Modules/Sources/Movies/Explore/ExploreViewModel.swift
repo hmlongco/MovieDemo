@@ -34,16 +34,14 @@ final class ExploreViewModel {
     @ObservationIgnored
     @Injected(\.movieRepository) private var service
 
-    func loadData() {
+    func loadData() async {
         isLoading = true
-        Task {
-            await withTaskGroup(of: Void.self) { group in
-                group.addTask { await self.fetchGenres() }
-                group.addTask { await self.fetchCollections() }
-                group.addTask { await self.fetchArrivals() }
-            }
-            isLoading = false
+        await withTaskGroup(of: Void.self) { group in
+            group.addTask { await self.fetchGenres() }
+            group.addTask { await self.fetchCollections() }
+            group.addTask { await self.fetchArrivals() }
         }
+        isLoading = false
     }
 
     private func fetchGenres() async {

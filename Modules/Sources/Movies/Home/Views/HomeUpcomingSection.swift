@@ -25,7 +25,7 @@ struct HomeUpcomingSection: View {
                 .frame(width: 280)
         }
         .task(id: refreshID) {
-            viewModel.load()
+            await viewModel.load()
         }
     }
 }

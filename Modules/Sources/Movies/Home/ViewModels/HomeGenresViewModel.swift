@@ -14,15 +14,13 @@ final class HomeGenresViewModel {
     @ObservationIgnored
     @Injected(\.movieRepository) private var service
 
-    func load() {
+    func load() async {
         state = .loading
-        Task {
-            do {
-                let result = try await service.getGenres()
-                state = .loaded(result.genres)
-            } catch {
-                state = .error(error.localizedDescription)
-            }
+        do {
+            let result = try await service.getGenres()
+            state = .loaded(result.genres)
+        } catch {
+            state = .error(error.localizedDescription)
         }
     }
 }

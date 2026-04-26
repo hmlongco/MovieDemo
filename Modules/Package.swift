@@ -88,7 +88,8 @@ let package = Package(
         .testTarget(
             name: "ModulesTests",
             dependencies: [
-                "App"
+                "App",
+                .product(name: "FactoryTesting", package: "Factory"),
             ],
             path: "Tests"
         ),

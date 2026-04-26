@@ -29,7 +29,7 @@ public struct ExploreView: View {
 
             searchBar
         }
-        .task { viewModel.loadData() }
+        .task { await viewModel.loadData() }
         .animation(.easeInOut(duration: 0.2), value: isSearching)
     }
 
