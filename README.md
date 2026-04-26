@@ -1,7 +1,3 @@
-[![swift-versions](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fhmlongco%2FNavigator%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/hmlongco/Navigator)
-[![platforms](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fhmlongco%2FNavigator%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/hmlongco/Navigator)
-![License](https://img.shields.io/badge/License-MIT-brown.svg)
-
 ![](https://github.com/hmlongco/MovieDemo/blob/main/Logo.png?raw=true)
 
 # MovieDemo
