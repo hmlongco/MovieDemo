@@ -63,7 +63,7 @@ extension Container: AutoRegistering {
 }
 ```
 
-In debug builds, `Container.setupMovieMocks()` replaces the network client with pre-recorded responses, so every SwiftUI Preview and unit test runs without hitting the network.
+In debug builds, `Container.setupMovieMocks()` and `setupMovieErrors()` replaces the network client with pre-recorded responses, so every SwiftUI Preview and unit test can run without hitting the network.
 
 ### Navigation — Navigator
 
@@ -97,6 +97,12 @@ The Playgrounds solve this by providing small, standalone Xcode projects that im
 | `ProfilePlayground` | `ProfileApp` | All Profile feature views |
 
 Because each playground depends on a focused subset of the package graph, previews rebuild in seconds rather than minutes. The `#if DEBUG` mock infrastructure (`Movie.mock`, `User.mock`, `Container.setupMovieMocks()`, etc.) is available in both playgrounds without any extra setup.
+
+## Testing
+
+The Modules repository contains tests for Movies view models and Shared repositories and services. Theses tests are based on the aforementioned mock and error functions used for previews.
+
+The tests are written using Swift's new Testing framework, as well as FactoryTesting's container trait so all tests are capable of running in parallel.
 
 ## Getting Started
 
@@ -143,8 +149,8 @@ Or you can just buy me a cup of coffee!
 
 ## Additional Resources
 
-* [Medium Articles](https://medium.com/@michaellong)
-* [LinkedIn](https://www.linkedin.com/in/hmlong/)
+* [Medium: The SwiftUI Navigation Series](https://michaellong.medium.com/the-swiftui-navigation-series-1b00d2bdee5d)
+* [Medium: The SwiftUI Dependency Injection Series](https://medium.com/the-swift-cooperative/the-swift-dependency-injection-series-365ce5038ef7)
 * [Factory](https://github.com/hmlongco/Factory)
 * [Navigator](https://github.com/hmlongco/Navigator)
 * [Runes](https://github.com/hmlongco/Runes)
