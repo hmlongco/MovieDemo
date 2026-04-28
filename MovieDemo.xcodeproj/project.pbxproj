@@ -31,6 +31,7 @@
 		4C09F2E02F89B80E00C81E3C /* MovieDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C09F2ED2F89B80F00C81E3C /* MovieDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovieDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C09F2F72F89B81000C81E3C /* MovieDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovieDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4C917A5F2FA0FD55009876E6 /* Claude.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Claude.md; sourceTree = "<group>"; };
 		4CD6F8FB2F9E985600F138A1 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -81,6 +82,7 @@
 		4C09F2D72F89B80E00C81E3C = {
 			isa = PBXGroup;
 			children = (
+				4C917A5F2FA0FD55009876E6 /* Claude.md */,
 				4CD6F8FB2F9E985600F138A1 /* README.md */,
 				4C09F2E22F89B80E00C81E3C /* MovieDemo */,
 				4C09F2F02F89B81000C81E3C /* MovieDemoTests */,
