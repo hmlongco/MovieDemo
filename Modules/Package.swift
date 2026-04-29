@@ -12,7 +12,7 @@ let package = Package(
         .library(name: "ProfileApp", targets: ["ProfileApp"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/hmlongco/Factory", branch: "develop"),
+        .package(url: "https://github.com/hmlongco/Factory", branch: "main"),
         .package(url: "https://github.com/hmlongco/Navigator", branch: "main"),
         .package(url: "https://github.com/hmlongco/Runes", branch: "main"),
     ],
