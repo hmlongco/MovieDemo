@@ -1,4 +1,4 @@
-import FactoryKit
+import FactoryMacros
 import SwiftUI
 
 extension Container {

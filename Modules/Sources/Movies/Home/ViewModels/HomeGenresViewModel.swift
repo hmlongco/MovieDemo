@@ -1,23 +1,19 @@
 import Foundation
-import FactoryKit
+import FactoryMacros
 import Runes
 import Shared
 
-@Observable
-@MainActor
-final class HomeGenresViewModel {
+@Dependency(\.movieRepository)
+@MainActor @Observable final class HomeGenresViewModel {
 
     var state: LoadableState<[Genre]> = .initial
 
     var currentGenres: [Genre] { state.value ?? [] }
 
-    @ObservationIgnored
-    @Injected(\.movieRepository) private var service
-
     func load() async {
         state = .loading
         do {
-            let result = try await service.getGenres()
+            let result = try await movieRepository.getGenres()
             state = .loaded(result.genres)
         } catch {
             state = .error(error.localizedDescription)

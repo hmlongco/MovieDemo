@@ -6,8 +6,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/hmlongco/Factory",
       "state" : {
-        "branch" : "main",
-        "revision" : "54cd3e2a441568591bfaafd9f56700e9ee4ec505"
+        "branch" : "develop",
+        "revision" : "8d3ce6dfb13ba3c5b27699240601b68e0fdf3fc6"
       }
     },
     {
@@ -26,6 +26,15 @@
       "state" : {
         "branch" : "main",
         "revision" : "9f358f36bada836b0dcde5b36cb0826a4f3c8dce"
+      }
+    },
+    {
+      "identity" : "swift-syntax",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swiftlang/swift-syntax.git",
+      "state" : {
+        "revision" : "f99ae8aa18f0cf0d53481901f88a0991dc3bd4a2",
+        "version" : "601.0.1"
       }
     }
   ],

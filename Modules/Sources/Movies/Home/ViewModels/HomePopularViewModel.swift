@@ -1,21 +1,17 @@
 import Foundation
-import FactoryKit
+import FactoryMacros
 import Runes
 import Shared
 
-@Observable
-@MainActor
-final class HomePopularViewModel {
+@Dependency(\.movieRepository)
+@MainActor @Observable final class HomePopularViewModel {
 
     var state: LoadableState<[Movie]> = .initial
-
-    @ObservationIgnored
-    @Injected(\.movieRepository) private var service
 
     func load() async {
         state = .loading
         do {
-            let result = try await service.getPopularMovies(page: 1)
+            let result = try await movieRepository.getPopularMovies(page: 1)
             state = .loaded(result.results)
         } catch {
             state = .loaded([])

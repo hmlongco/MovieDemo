@@ -1,4 +1,4 @@
-import FactoryKit
+import FactoryMacros
 import NavigatorUI
 import Runes
 import Shared

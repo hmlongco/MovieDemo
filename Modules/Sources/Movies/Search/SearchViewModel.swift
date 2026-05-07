@@ -1,11 +1,10 @@
 import Foundation
-import FactoryKit
+import FactoryMacros
 import Runes
 import Shared
 
-@Observable
-@MainActor
-final class SearchViewModel {
+@Dependency(\.movieRepository)
+@MainActor @Observable final class SearchViewModel {
 
     var searchQuery:   String                  = ""
     var searchResults: LoadableState<[Movie]>  = .initial
@@ -23,9 +22,6 @@ final class SearchViewModel {
         if case .initial = searchResults { return true }
         return false
     }
-
-    @ObservationIgnored
-    @Injected(\.movieRepository) private var service
 
     @ObservationIgnored
     private var searchTask: Task<Void, Never>?
@@ -48,7 +44,7 @@ final class SearchViewModel {
         searchResults = .loading
         do {
             try? await Task.sleep(for: .seconds(1))
-            let result = try await service.searchMovies(query: query, page: 1)
+            let result = try await movieRepository.searchMovies(query: query, page: 1)
             searchResults = result.results.isEmpty ? .empty("No results for \"\(query)\"") : .loaded(result.results)
         } catch {
             searchResults = .error(error.localizedDescription)

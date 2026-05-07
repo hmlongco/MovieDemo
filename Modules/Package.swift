@@ -12,7 +12,7 @@ let package = Package(
         .library(name: "ProfileApp", targets: ["ProfileApp"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/hmlongco/Factory", branch: "main"),
+        .package(url: "https://github.com/hmlongco/Factory", branch: "develop"),
         .package(url: "https://github.com/hmlongco/Navigator", branch: "main"),
         .package(url: "https://github.com/hmlongco/Runes", branch: "main"),
     ],
@@ -24,7 +24,7 @@ let package = Package(
                 "Movies",
                 "Profile",
                 "Shared",
-                .product(name: "FactoryKit", package: "Factory"),
+                .product(name: "FactoryMacros", package: "Factory"),
                 .product(name: "NavigatorUI", package: "Navigator"),
                 .product(name: "Runes", package: "Runes"),
             ]
@@ -36,7 +36,7 @@ let package = Package(
                 "DesignSystem",
                 "Movies",
                 "Shared",
-                .product(name: "FactoryKit", package: "Factory"),
+                .product(name: "FactoryMacros", package: "Factory"),
                 .product(name: "NavigatorUI", package: "Navigator"),
                 .product(name: "Runes", package: "Runes"),
             ]
@@ -48,7 +48,7 @@ let package = Package(
                 "DesignSystem",
                 "Profile",
                 "Shared",
-                .product(name: "FactoryKit", package: "Factory"),
+                .product(name: "FactoryMacros", package: "Factory"),
                 .product(name: "NavigatorUI", package: "Navigator"),
                 .product(name: "Runes", package: "Runes"),
             ]
@@ -57,14 +57,14 @@ let package = Package(
         .target(
             name: "DesignSystem",
             dependencies: [
-                .product(name: "FactoryKit", package: "Factory"),
+                .product(name: "FactoryMacros", package: "Factory"),
             ]
         ),
         .target(
             name: "Movies",
             dependencies: [
                 "Shared",
-                .product(name: "FactoryKit", package: "Factory"),
+                .product(name: "FactoryMacros", package: "Factory"),
                 .product(name: "NavigatorUI", package: "Navigator"),
                 .product(name: "Runes", package: "Runes"),
             ]
@@ -73,7 +73,7 @@ let package = Package(
             name: "Profile",
             dependencies: [
                 "Shared",
-                .product(name: "FactoryKit", package: "Factory"),
+                .product(name: "FactoryMacros", package: "Factory"),
                 .product(name: "NavigatorUI", package: "Navigator"),
                 .product(name: "Runes", package: "Runes"),
            ]
@@ -81,7 +81,7 @@ let package = Package(
         .target(
             name: "Shared",
             dependencies: [
-                .product(name: "FactoryKit", package: "Factory"),
+                .product(name: "FactoryMacros", package: "Factory"),
                 .product(name: "Runes", package: "Runes"),
             ]
         ),
@@ -89,6 +89,7 @@ let package = Package(
             name: "ModulesTests",
             dependencies: [
                 "App",
+                .product(name: "FactoryMacros", package: "Factory"),
                 .product(name: "FactoryTesting", package: "Factory"),
             ],
             path: "Tests"

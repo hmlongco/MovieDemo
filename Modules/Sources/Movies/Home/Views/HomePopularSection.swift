@@ -1,4 +1,4 @@
-import FactoryKit
+import FactoryMacros
 import SwiftUI
 import Runes
 import Shared

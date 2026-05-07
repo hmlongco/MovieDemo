@@ -1,11 +1,10 @@
 import Foundation
-import FactoryKit
+import FactoryMacros
 import Runes
 import Shared
 
-@Observable
-@MainActor
-final class MovieListViewModel {
+@Dependency(\.movieRepository)
+@MainActor @Observable final class MovieListViewModel {
 
     // MARK: - State
     private(set) var movies:          [Movie]              = []
@@ -39,17 +38,12 @@ final class MovieListViewModel {
     let genres:   [Genre]
     private let sectionType: HomeSection
 
-    // MARK: - Dependencies
-    @ObservationIgnored
-    @Injected(\.movieRepository) private var service
-
     // MARK: - Init
     init(
         title: String,
         sectionType: HomeSection,
         genres: [Genre],
-        selectedGenre: Genre?,
-        service: MovieServices? = nil
+        selectedGenre: Genre?
     ) {
         self.title        = title
         self.sectionType  = sectionType
@@ -96,17 +90,17 @@ final class MovieListViewModel {
             let response: MovieResponse
 
             if let genre = selectedGenre {
-                response = try await service.discoverMovies(page: currentPage, genreId: genre.id)
+                response = try await movieRepository.discoverMovies(page: currentPage, genreId: genre.id)
             } else {
                 switch sectionType {
                 case .popular:
-                    response = try await service.getPopularMovies(page: currentPage)
+                    response = try await movieRepository.getPopularMovies(page: currentPage)
                 case .upcoming:
-                    response = try await service.getNowPlayingMovies(page: currentPage)
+                    response = try await movieRepository.getNowPlayingMovies(page: currentPage)
                 case .topRated:
-                    response = try await service.getTopRatedMovies(page: currentPage)
+                    response = try await movieRepository.getTopRatedMovies(page: currentPage)
                 case .hero, .categories:
-                    response = try await service.getNowPlayingMovies(page: currentPage)
+                    response = try await movieRepository.getNowPlayingMovies(page: currentPage)
                 }
             }
 

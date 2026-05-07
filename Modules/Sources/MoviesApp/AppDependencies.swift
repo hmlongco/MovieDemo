@@ -5,7 +5,7 @@
 //  Created by Michael Long on 4/20/26.
 //
 
-import FactoryKit
+import FactoryMacros
 import Shared
 
 extension Container: AutoRegistering {

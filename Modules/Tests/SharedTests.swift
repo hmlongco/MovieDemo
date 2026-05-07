@@ -1,5 +1,5 @@
 
-import FactoryKit
+import FactoryMacros
 import Shared
 import Testing
 import FactoryTesting

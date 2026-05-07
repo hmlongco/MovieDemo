@@ -1,8 +1,8 @@
 import Foundation
-import FactoryKit
+import FactoryMacros
 
-@MainActor
-public final class MovieRepository: MovieServices {
+@Dependency(\.movieService)
+@MainActor public final class MovieRepository: MovieServices {
 
     // MARK: - Cache Key
 
@@ -27,10 +27,6 @@ public final class MovieRepository: MovieServices {
     private var creditsCache:    [Int: CreditsResponse]  = [:]
     private var genresCache:     GenreResponse?          = nil
 
-    // MARK: - Dependencies
-
-    @Injected(\.movieService) private var service
-
     // MARK: - Lifecycle
 
     public init() {}
@@ -39,42 +35,42 @@ public final class MovieRepository: MovieServices {
 
     public func getPopularMovies(page: Int) async throws -> MovieResponse {
         if let cached = popularCache[page] { return cached }
-        let result = try await service.getPopularMovies(page: page)
+        let result = try await movieService.getPopularMovies(page: page)
         popularCache[page] = result
         return result
     }
 
     public func getTopRatedMovies(page: Int) async throws -> MovieResponse {
         if let cached = topRatedCache[page] { return cached }
-        let result = try await service.getTopRatedMovies(page: page)
+        let result = try await movieService.getTopRatedMovies(page: page)
         topRatedCache[page] = result
         return result
     }
 
     public func getNowPlayingMovies(page: Int) async throws -> MovieResponse {
         if let cached = nowPlayingCache[page] { return cached }
-        let result = try await service.getNowPlayingMovies(page: page)
+        let result = try await movieService.getNowPlayingMovies(page: page)
         nowPlayingCache[page] = result
         return result
     }
 
     public func getMovieDetails(id: Int) async throws -> MovieDetail {
         if let cached = detailCache[id] { return cached }
-        let result = try await service.getMovieDetails(id: id)
+        let result = try await movieService.getMovieDetails(id: id)
         detailCache[id] = result
         return result
     }
 
     public func getMovieCredits(id: Int) async throws -> CreditsResponse {
         if let cached = creditsCache[id] { return cached }
-        let result = try await service.getMovieCredits(id: id)
+        let result = try await movieService.getMovieCredits(id: id)
         creditsCache[id] = result
         return result
     }
 
     public func getGenres() async throws -> GenreResponse {
         if let cached = genresCache { return cached }
-        let result = try await service.getGenres()
+        let result = try await movieService.getGenres()
         genresCache = result
         return result
     }
@@ -82,13 +78,13 @@ public final class MovieRepository: MovieServices {
     public func discoverMovies(page: Int, genreId: Int?) async throws -> MovieResponse {
         let key = "\(page)_\(genreId ?? 0)"
         if let cached = discoverCache[key] { return cached }
-        let result = try await service.discoverMovies(page: page, genreId: genreId)
+        let result = try await movieService.discoverMovies(page: page, genreId: genreId)
         discoverCache[key] = result
         return result
     }
 
     public func searchMovies(query: String, page: Int) async throws -> MovieResponse {
-        try await service.searchMovies(query: query, page: page)
+        try await movieService.searchMovies(query: query, page: page)
     }
 
     // MARK: - Cache Invalidation

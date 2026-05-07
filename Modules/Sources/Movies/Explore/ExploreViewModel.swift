@@ -1,5 +1,5 @@
 import Foundation
-import FactoryKit
+import FactoryMacros
 
 public struct ExploreGenre: Hashable, Identifiable {
     public let id: String
@@ -21,18 +21,14 @@ public struct ExploreArrival: Hashable, Identifiable {
     public let imageURL: String
 }
 
-@Observable
-@MainActor
-final class ExploreViewModel {
+@Dependency(\.movieRepository)
+@MainActor @Observable final class ExploreViewModel {
 
     var genres:      [ExploreGenre]      = []
     var allGenres:   [ExploreGenre]      = []
     var collections: [ExploreCollection] = []
     var arrivals:    [ExploreArrival]    = []
     var isLoading:   Bool                = false
-
-    @ObservationIgnored
-    @Injected(\.movieRepository) private var service
 
     func loadData() async {
         isLoading = true
@@ -47,7 +43,7 @@ final class ExploreViewModel {
     private func fetchGenres() async {
         let colors = ["#FF3B30", "#5AC8FA", "#FF9500", "#AF52DE"]
         do {
-            let response = try await service.getGenres()
+            let response = try await movieRepository.getGenres()
             allGenres = response.genres.enumerated().map { index, genre in
                 ExploreGenre(
                     id: String(genre.id),
@@ -63,7 +59,7 @@ final class ExploreViewModel {
 
     private func fetchCollections() async {
         do {
-            let popular = try await service.getPopularMovies(page: 1)
+            let popular = try await movieRepository.getPopularMovies(page: 1)
             collections = popular.results.prefix(5).map { movie in
                 ExploreCollection(
                     id: String(movie.id),
@@ -79,7 +75,7 @@ final class ExploreViewModel {
 
     private func fetchArrivals() async {
         do {
-            let nowPlaying = try await service.getNowPlayingMovies(page: 1)
+            let nowPlaying = try await movieRepository.getNowPlayingMovies(page: 1)
             arrivals = nowPlaying.results.prefix(10).map { movie in
                 ExploreArrival(
                     id: String(movie.id),

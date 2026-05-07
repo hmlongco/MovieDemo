@@ -1,23 +1,18 @@
-import FactoryKit
-import Observation
+import FactoryMacros
 import Shared
 
-@Observable
-@MainActor
-final class ProfileViewModel {
+@Dependency(\.authenticationService)
+@MainActor @Observable final class ProfileViewModel {
     var authenticatedUser: User?
 
-    @ObservationIgnored
-    @Injected(\.authenticationService) private var service
-
     init() {
-        authenticatedUser = service.authenticatedUser
+        authenticatedUser = authenticationService.authenticatedUser
     }
 
     func logout() {
         Task {
-            await service.logout()
-            authenticatedUser = service.authenticatedUser
+            await authenticationService.logout()
+            authenticatedUser = authenticationService.authenticatedUser
         }
     }
 }
