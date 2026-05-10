@@ -43,9 +43,9 @@ Modules/Sources/
 
 The main `MovieDemo` app target imports only the `App` library. Everything else is resolved transitively through the package graph.
 
-### Dependency Injection — Factory
+### Dependency Injection — Factory Macros
 
-[Factory](https://github.com/hmlongco/Factory) is used throughout the app for dependency injection. All services are registered on `Container` via `AutoRegistering`, so dependencies are resolved automatically at startup with no manual wiring.
+[Factory](https://github.com/hmlongco/Factory) is used throughout the app for dependency injection. All services are registered on the global `Container`.
 
 ```swift
 // Container+Extensions.swift
@@ -53,12 +53,27 @@ extension Container {
     var movieService: Factory<MovieServices> {
         self { MovieService(client: self.movieClient()) }.singleton
     }
-}
+    
+    @MainActor public var movieRepository: Factory<MovieServices> {
+        self { MovieRepository() }
+            .singleton
+    }
+```
+Dependency resolution and injection occurs using Factory Macros.
+```swift
+@Dependency(\.movieRepository)
+@MainActor @Observable final class HomeHeroViewModel {
 
-// AppDependencies.swift
-extension Container: AutoRegistering {
-    public func autoRegister() {
-        movieApiKey.register { "YOUR_TMDB_API_KEY" }
+    var state: LoadableState<[Movie]> = .initial
+
+    func load() async {
+        do {
+            state = .loading
+            let result = try await movieRepository.getNowPlayingMovies(page: 1)
+            state = .loaded(result.results)
+        } catch {
+            state = .loaded([])
+        }
     }
 }
 ```
@@ -71,10 +86,10 @@ In debug builds, `Container.setupMovieMocks()` and `setupMovieErrors()` replaces
 
 ```swift
 // AppView.swift
-struct HomeTab: View {
+struct ProfileTabView: View {
     var body: some View {
         ManagedNavigationStack {
-            HomeView()
+            ProfileView()
         }
     }
 }
