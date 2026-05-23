@@ -1,13 +1,13 @@
 {
-  "originHash" : "0cb9274015c4e78930a13e8ce25d45612c9ac6cdd6fa690a0ef78b65cf2cb338",
+  "originHash" : "d76e6c9b21aec03cc5918dc00c49a0670d1a116096c396796f5473cfa2eee92b",
   "pins" : [
     {
       "identity" : "factory",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/hmlongco/Factory",
       "state" : {
-        "branch" : "develop",
-        "revision" : "8d3ce6dfb13ba3c5b27699240601b68e0fdf3fc6"
+        "branch" : "macros",
+        "revision" : "8f29c780b0e73627c3a540dd598f679424abd5d9"
       }
     },
     {
