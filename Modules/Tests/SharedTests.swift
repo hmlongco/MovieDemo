@@ -1,6 +1,7 @@
 
 import FactoryKit
 import Shared
+import SwiftData
 import Testing
 import FactoryTesting
 
@@ -227,6 +228,54 @@ struct SharedErrorTests {
         await #expect(throws: NetworkError.self) {
             try await repo.searchMovies(query: "", page: 1)
         }
+    }
+
+}
+
+@MainActor
+@Suite(.container)
+struct MovieRatingRepositoryTests {
+
+    init() {
+        Container.shared.modelContainer.register {
+            do {
+                let configuration = ModelConfiguration(isStoredInMemoryOnly: true)
+                return try ModelContainer(for: MovieRating.self, configurations: configuration)
+            } catch {
+                fatalError("Failed to create in-memory ModelContainer: \(error)")
+            }
+        }
+    }
+
+    @Test func unratedMovieReturnsZero() {
+        let repo = MovieRatingRepository()
+        #expect(repo.rating(for: 1) == 0)
+    }
+
+    @Test func settingRatingPersists() {
+        let repo = MovieRatingRepository()
+        repo.setRating(4, for: 1)
+        #expect(repo.rating(for: 1) == 4)
+    }
+
+    @Test func updatingRatingOverwritesRatherThanDuplicating() {
+        let repo = MovieRatingRepository()
+        repo.setRating(3, for: 1)
+        repo.setRating(5, for: 1)
+
+        // A fresh repository re-fetches from the same container. If setRating had inserted a
+        // second row instead of updating the existing one, this would crash while building the
+        // ratings dictionary (duplicate keys), not just return a stale value.
+        let reloaded = MovieRatingRepository()
+        #expect(reloaded.rating(for: 1) == 5)
+    }
+
+    @Test func freshRepositoryReloadsPersistedRatings() {
+        let first = MovieRatingRepository()
+        first.setRating(2, for: 42)
+
+        let second = MovieRatingRepository()
+        #expect(second.rating(for: 42) == 2)
     }
 
 }

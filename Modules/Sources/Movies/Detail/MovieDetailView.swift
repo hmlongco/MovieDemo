@@ -2,6 +2,7 @@ import FactoryKit
 import NavigatorUI
 import Runes
 import Shared
+import SwiftData
 import SwiftUI
 
 struct MovieDetailView: View {
@@ -15,15 +16,15 @@ struct MovieDetailView: View {
 
     var body: some View {
         ScrollView {
-            GeometryReader { geo in
-                let offset = geo.frame(in: .named("scroll")).minY
-                Color.clear
-                    .preference(key: ScrollOffsetKey.self, value: offset)
-                    .frame(height: 0)
-            }
-            .frame(height: 0)
-
             VStack(spacing: 0) {
+                GeometryReader { geo in
+                    let offset = geo.frame(in: .named("scroll")).minY
+                    Color.clear
+                        .preference(key: ScrollOffsetKey.self, value: offset)
+                        .frame(height: 0)
+                }
+                .frame(height: 0)
+
                 heroImage
                 detailContent
             }
@@ -97,6 +98,8 @@ struct MovieDetailView: View {
                                 .foregroundStyle(.white)
                                 .font(.system(size: 13, weight: .medium))
                         }
+                        Spacer()
+                        StarRatingRepositoryView(movieId: movieId)
                     }
 
                     if !detail.genreText.isEmpty {
@@ -249,6 +252,8 @@ private struct ScrollOffsetKey: PreferenceKey {
 #if DEBUG
 #Preview {
     Container.shared.setupMovieMocks()
+    Container.shared.setupRatingMocks()
     MovieDetailView(movieId: 1)
+        .modelContainer(for: MovieRating.self, inMemory: true)
 }
 #endif

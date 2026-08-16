@@ -7,11 +7,20 @@
 
 import FactoryKit
 import Shared
+import SwiftData
 
-extension Container: AutoRegistering {
+extension Container: @retroactive AutoRegistering {
     public func autoRegister() {
         // WARNING: Add your own TMDB Authorization API key
         movieApiKey.register { "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhNjE0NzAzYjhjNTYxNmM5MDEzNmU2YWU4NTRjYzU5MyIsIm5iZiI6MTc3NjcxMjE1Mi43OTYsInN1YiI6IjY5ZTY3OWQ4NjQzYjdlYmUwZjA2NDYxMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.2urBrtjWlhX-IaDT6aySvTWwEmHjbIsk36jfA8-TkIQ"
+        }
+
+        modelContainer.register {
+            do {
+                return try ModelContainer(for: MovieRating.self)
+            } catch {
+                fatalError("Failed to create ModelContainer: \(error)")
+            }
         }
     }
 }

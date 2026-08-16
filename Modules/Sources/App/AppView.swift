@@ -1,8 +1,10 @@
+import FactoryKit
 import Movies
 import NavigatorUI
 import Profile
 import Runes
 import Shared
+import SwiftData
 import SwiftUI
 
 public struct AppView: View {
@@ -28,6 +30,7 @@ public struct AppView: View {
         .tint(.white)
         .preferredColorScheme(.dark)
         .environment(appNav)
+        .environment(\.modelContext, dependency(\.modelContext))
     }
 }
 

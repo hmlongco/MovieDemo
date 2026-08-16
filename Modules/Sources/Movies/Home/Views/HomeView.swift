@@ -16,15 +16,15 @@ public struct HomeView: View {
 
     public var body: some View {
         ScrollView {
-            GeometryReader { geo in
-                let offset = geo.frame(in: .named("homeScroll")).minY
-                Color.clear
-                    .preference(key: HomeScrollOffsetKey.self, value: offset)
-                    .frame(height: 0)
-            }
-            .frame(height: 0)
-
             VStack(alignment: .leading, spacing: 0) {
+                GeometryReader { geo in
+                    let offset = geo.frame(in: .named("homeScroll")).minY
+                    Color.clear
+                        .preference(key: HomeScrollOffsetKey.self, value: offset)
+                        .frame(height: 0)
+                }
+                .frame(height: 0)
+
                 HomeHeroSection(refreshID: refreshID) { movie in
                     navigateToDetail(movie: movie)
                 }
@@ -49,12 +49,12 @@ public struct HomeView: View {
             }
             .padding(.bottom, 100)
         }
+        .background(Color(hex: "0A0A0A").ignoresSafeArea())
         .coordinateSpace(name: "homeScroll")
         .onPreferenceChange(HomeScrollOffsetKey.self) { scrollOffset = $0 }
         .scrollIndicators(.hidden)
-        .refreshable { refreshID += 1 }
-        .background(Color(hex: "0A0A0A").ignoresSafeArea())
         .ignoresSafeArea(edges: .top)
+        .refreshable { refreshID += 1 }
     }
 
     // MARK: - Navigation

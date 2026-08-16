@@ -1,4 +1,5 @@
 import FactoryKit
+import SwiftData
 import SwiftUI
 
 extension Container {
@@ -11,6 +12,18 @@ extension Container {
 
     public var movieApiKey: Factory<String?> {
         promised()
+    }
+
+    /// The app's shared SwiftData `ModelContainer`. Must be registered by the composition root
+    /// (e.g. `MoviesApp`/`App`'s `AppDependencies.autoRegister()`) before any `@Model`-backed
+    /// repository resolves it. `.singleton` so every resolution shares one container/store rather
+    /// than each caller creating its own.
+    public var modelContainer: Factory<ModelContainer?> {
+        promised().singleton
+    }
+
+    public var modelContext: Factory<ModelContext> {
+        self { ModelContext(self.modelContainer()!) }.singleton
     }
 
     public var movieClient: Factory<NetworkClient> {
@@ -35,6 +48,12 @@ extension Container {
     public var movieRepository: Factory<MovieServices> {
         self { MovieRepository() }
             .singleton
+    }
+
+    @MainActor
+    public var movieRatingRepository: Factory<MovieRatingRepository> {
+        self { MovieRatingRepository() }
+            .cached
     }
 }
 
@@ -63,6 +82,16 @@ extension Container {
         movieClient().mock(TMDBEndpoint.getGenres, error: error)
         movieClient().mock(TMDBEndpoint.discover(page: 1, genreId: nil), error: error)
         movieClient().mock(TMDBEndpoint.search(query: "", page: 1), error: error)
+        return EmptyView()
+    }
+
+    /// Registers an in-memory `ModelContainer` so previews using `movieRatingRepository`
+    /// (or anything else resolving `\.modelContainer`) don't crash on the unregistered promise.
+    @discardableResult
+    public func setupRatingMocks() -> some View {
+        modelContainer.register {
+            try? ModelContainer(for: MovieRating.self, configurations: .init(isStoredInMemoryOnly: true))
+        }
         return EmptyView()
     }
 }

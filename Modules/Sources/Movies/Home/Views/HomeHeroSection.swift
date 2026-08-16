@@ -86,6 +86,8 @@ private struct HeroCard: View {
                             .foregroundStyle(.white)
                             .font(.system(size: 13, weight: .medium))
                     }
+                    Spacer()
+                    StarRatingRepositoryView(movieId: movie.id)
                 }
             }
             .padding(.horizontal, 16)
