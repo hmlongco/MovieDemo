@@ -39,4 +39,12 @@ public class MovieService: MovieServices {
     public func searchMovies(query: String, page: Int = 1) async throws -> MovieResponse {
         return try await client.request(TMDBEndpoint.search(query: query, page: page))
     }
+
+    public func getPersonDetails(id: Int) async throws -> PersonDetail {
+        return try await client.request(TMDBEndpoint.getPersonDetails(id: id))
+    }
+
+    public func getPersonCombinedCredits(id: Int) async throws -> PersonCombinedCredits {
+        return try await client.request(TMDBEndpoint.getPersonCombinedCredits(id: id))
+    }
 }

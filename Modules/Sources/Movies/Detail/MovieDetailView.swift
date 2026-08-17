@@ -153,7 +153,12 @@ struct MovieDetailView: View {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 12) {
                         ForEach(cast.prefix(10)) { member in
-                            CastMemberView(cast: member)
+                            Button {
+                                navigator.navigate(to: MovieDestination.personDetail(personId: member.id))
+                            } label: {
+                                CastMemberView(cast: member)
+                            }
+                            .buttonStyle(.plain)
                         }
                     }
                     .padding(.horizontal, 2)

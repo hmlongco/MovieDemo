@@ -14,18 +14,22 @@ public final class MovieRepository: MovieServices {
         case movieDetail(id: Int)
         case movieCredits(id: Int)
         case genres
+        case personDetail(id: Int)
+        case personCredits(id: Int)
         case all
     }
 
     // MARK: - Cache Storage
 
-    private var popularCache:    [Int: MovieResponse]    = [:]
-    private var topRatedCache:   [Int: MovieResponse]    = [:]
-    private var nowPlayingCache: [Int: MovieResponse]    = [:]
-    private var discoverCache:   [String: MovieResponse] = [:]
-    private var detailCache:     [Int: MovieDetail]      = [:]
-    private var creditsCache:    [Int: CreditsResponse]  = [:]
-    private var genresCache:     GenreResponse?          = nil
+    private var popularCache:      [Int: MovieResponse]           = [:]
+    private var topRatedCache:     [Int: MovieResponse]           = [:]
+    private var nowPlayingCache:   [Int: MovieResponse]           = [:]
+    private var discoverCache:     [String: MovieResponse]        = [:]
+    private var detailCache:       [Int: MovieDetail]             = [:]
+    private var creditsCache:      [Int: CreditsResponse]         = [:]
+    private var genresCache:       GenreResponse?                 = nil
+    private var personDetailCache: [Int: PersonDetail]            = [:]
+    private var personCreditsCache: [Int: PersonCombinedCredits]  = [:]
 
     // MARK: - Dependencies
 
@@ -91,6 +95,20 @@ public final class MovieRepository: MovieServices {
         try await service.searchMovies(query: query, page: page)
     }
 
+    public func getPersonDetails(id: Int) async throws -> PersonDetail {
+        if let cached = personDetailCache[id] { return cached }
+        let result = try await service.getPersonDetails(id: id)
+        personDetailCache[id] = result
+        return result
+    }
+
+    public func getPersonCombinedCredits(id: Int) async throws -> PersonCombinedCredits {
+        if let cached = personCreditsCache[id] { return cached }
+        let result = try await service.getPersonCombinedCredits(id: id)
+        personCreditsCache[id] = result
+        return result
+    }
+
     // MARK: - Cache Invalidation
 
     public func invalidate(_ key: CacheKey) {
@@ -124,6 +142,12 @@ public final class MovieRepository: MovieServices {
         case .genres:
             genresCache = nil
 
+        case .personDetail(let id):
+            personDetailCache.removeValue(forKey: id)
+
+        case .personCredits(let id):
+            personCreditsCache.removeValue(forKey: id)
+
         case .all:
             popularCache.removeAll()
             topRatedCache.removeAll()
@@ -132,6 +156,8 @@ public final class MovieRepository: MovieServices {
             detailCache.removeAll()
             creditsCache.removeAll()
             genresCache = nil
+            personDetailCache.removeAll()
+            personCreditsCache.removeAll()
         }
     }
 }

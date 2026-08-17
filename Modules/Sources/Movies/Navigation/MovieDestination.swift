@@ -7,11 +7,15 @@ public enum MovieDestination: NavigationDestination {
     case movieDetail(movieId: Int)
     case movieList(title: String, sectionTypeRaw: String, genreId: Int?, genreName: String?, allGenres: [Genre]?)
     case search
+    case personDetail(personId: Int)
 
     public var body: some View {
         switch self {
         case .movieDetail(let movieId):
             MovieDetailView(movieId: movieId)
+
+        case .personDetail(let personId):
+            PersonDetailView(personId: personId)
 
         case .movieList(let title, let sectionTypeRaw, let genreId, let genreName, let allGenres):
             let sectionType = HomeSection(rawValue: sectionTypeRaw) ?? .categories

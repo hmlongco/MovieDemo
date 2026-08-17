@@ -9,7 +9,9 @@ public enum TMDBEndpoint: Endpoint {
     case getGenres
     case discover(page: Int, genreId: Int?)
     case search(query: String, page: Int)
-    
+    case getPersonDetails(id: Int)
+    case getPersonCombinedCredits(id: Int)
+
     public var path: String {
         switch self {
         case .getPopularMovies:
@@ -28,6 +30,10 @@ public enum TMDBEndpoint: Endpoint {
             return "/discover/movie"
         case .search:
             return "/search/movie"
+        case .getPersonDetails(let id):
+            return "/person/\(id)"
+        case .getPersonCombinedCredits(let id):
+            return "/person/\(id)/combined_credits"
         }
     }
     
@@ -55,6 +61,8 @@ public enum TMDBEndpoint: Endpoint {
             return params
         case .search(let query, let page):
             return ["query": query, "page": String(page), "include_adult": "false"]
+        case .getPersonDetails, .getPersonCombinedCredits:
+            return nil
         }
     }
 }

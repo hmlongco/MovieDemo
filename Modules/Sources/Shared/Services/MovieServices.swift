@@ -17,5 +17,7 @@ public protocol MovieServices: Sendable {
     func getGenres() async throws -> GenreResponse
     func discoverMovies(page: Int, genreId: Int?) async throws -> MovieResponse
     func searchMovies(query: String, page: Int) async throws -> MovieResponse
+    func getPersonDetails(id: Int) async throws -> PersonDetail
+    func getPersonCombinedCredits(id: Int) async throws -> PersonCombinedCredits
 }
 

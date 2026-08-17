@@ -69,6 +69,8 @@ extension Container {
         movieClient().mock(TMDBEndpoint.getGenres, value: GenreResponse.mock1)
         movieClient().mock(TMDBEndpoint.discover(page: 1, genreId: nil), value: MovieResponse.mock1)
         movieClient().mock(TMDBEndpoint.search(query: "", page: 1), value: MovieResponse.mock1)
+        movieClient().mock(TMDBEndpoint.getPersonDetails(id: 1), value: PersonDetail.mock1)
+        movieClient().mock(TMDBEndpoint.getPersonCombinedCredits(id: 1), value: PersonCombinedCredits.mock1)
         return EmptyView()
     }
 
@@ -82,6 +84,8 @@ extension Container {
         movieClient().mock(TMDBEndpoint.getGenres, error: error)
         movieClient().mock(TMDBEndpoint.discover(page: 1, genreId: nil), error: error)
         movieClient().mock(TMDBEndpoint.search(query: "", page: 1), error: error)
+        movieClient().mock(TMDBEndpoint.getPersonDetails(id: 1), error: error)
+        movieClient().mock(TMDBEndpoint.getPersonCombinedCredits(id: 1), error: error)
         return EmptyView()
     }
 
