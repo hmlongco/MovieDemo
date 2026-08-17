@@ -12,9 +12,12 @@ struct PersonDetailView: View {
         ScrollView {
             switch viewModel.detailState {
             case .initial, .loading:
-                ProgressView()
-                    .tint(.white)
-                    .padding(.top, 120)
+                PersonDetailContent(detail: .mock1, filmography: [.mock1, .mock2, .mock3])
+                    .redacted(reason: .placeholder)
+                    .shimmer()
+                    .task {
+                         await viewModel.load(personId: personId)
+                    }
 
             case .loaded(let detail):
                 PersonDetailContent(detail: detail, filmography: viewModel.filmography)
@@ -31,9 +34,6 @@ struct PersonDetailView: View {
         .background(Color(hex: "0A0A0A").ignoresSafeArea())
         .scrollIndicators(.hidden)
         .navigationTitle("Cast")
-        .task {
-            await viewModel.load(personId: personId)
-        }
     }
 }
 

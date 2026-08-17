@@ -7,7 +7,7 @@ public class AppDelegate: UIResponder, UIApplicationDelegate {
     ) -> Bool {
         URLCache.shared = URLCache(
             memoryCapacity: 50 * 1024 * 1024,   // 50 MB memory
-            diskCapacity:   200 * 1024 * 1024,  // 200 MB disk
+            diskCapacity:   300 * 1024 * 1024,  // 300 MB disk
             diskPath:       "image_cache"
         )
         

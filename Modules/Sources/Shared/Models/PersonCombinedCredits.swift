@@ -41,7 +41,6 @@ public struct PersonCredit: Decodable, Identifiable, Equatable, Sendable {
     }
 }
 
-#if DEBUG
 public extension PersonCredit {
     static var mock1: PersonCredit {
         PersonCredit(
@@ -71,4 +70,3 @@ public extension PersonCombinedCredits {
         PersonCombinedCredits(cast: [.mock1, .mock2], crew: [.mock3])
     }
 }
-#endif

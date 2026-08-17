@@ -113,10 +113,7 @@ struct MovieDetailView: View {
                 if !detail.overview.isEmpty {
                     VStack(alignment: .leading, spacing: 8) {
                         SectionHeader(title: "Storyline")
-                        Text(detail.overview)
-                            .foregroundStyle(Color(hex: "A3A3A3"))
-                            .font(.system(size: 14))
-                            .lineSpacing(4)
+                        ExpandableText(detail.overview)
                     }
                 }
 
@@ -146,17 +143,26 @@ struct MovieDetailView: View {
 
     @ViewBuilder
     private var castSection: some View {
+        let director = viewModel.detailState.value?.director
         switch viewModel.castsState {
-        case .loaded(let cast) where !cast.isEmpty:
+        case .loaded(let cast) where !cast.isEmpty || director != nil:
             VStack(alignment: .leading, spacing: 12) {
-                SectionHeader(title: "Cast")
+                SectionHeader(title: "Cast/Credits")
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 12) {
-                        ForEach(cast.prefix(10)) { member in
+                         ForEach(cast.prefix(10)) { member in
                             Button {
                                 navigator.navigate(to: MovieDestination.personDetail(personId: member.id))
                             } label: {
-                                CastMemberView(cast: member)
+                                CastMemberView(name: member.name, role: member.character, profileURL: member.profileURL)
+                            }
+                            .buttonStyle(.plain)
+                        }
+                        if let director {
+                            Button {
+                                navigator.navigate(to: MovieDestination.personDetail(personId: director.id))
+                            } label: {
+                                CastMemberView(name: director.name, role: director.job, profileURL: director.profileURL)
                             }
                             .buttonStyle(.plain)
                         }
@@ -192,22 +198,24 @@ struct MovieDetailView: View {
 // MARK: - Supporting Views
 
 private struct CastMemberView: View {
-    let cast: Cast
+    let name: String
+    let role: String
+    let profileURL: URL?
     var body: some View {
         VStack(spacing: 6) {
-            RemoteImageView(url: cast.profileURL)
+            RemoteImageView(url: profileURL)
                 .frame(width: 64, height: 64)
                 .clipShape(Circle())
                 .overlay(Circle().stroke(Color.white.opacity(0.1), lineWidth: 1))
 
-            Text(cast.name)
+            Text(name)
                 .foregroundStyle(.white)
                 .font(.system(size: 11, weight: .medium))
                 .lineLimit(2)
                 .multilineTextAlignment(.center)
                 .frame(width: 64)
 
-            Text(cast.character)
+            Text(role)
                 .foregroundStyle(Color(hex: "737373"))
                 .font(.system(size: 10))
                 .lineLimit(1)
