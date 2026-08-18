@@ -15,18 +15,23 @@ public struct AppView: View {
 
     public var body: some View {
         TabView(selection: $appNav.selectedTab) {
-            HomeTab()
-                .tabItem { Label("Home",    systemImage: "house") }
-                .tag(AppTab.home)
+            Tab("Home", systemImage: "house", value: AppTab.home) {
+                HomeTab()
+            }
 
-            ExploreTab()
-                .tabItem { Label("Explore", systemImage: "magnifyingglass") }
-                .tag(AppTab.explore)
+            Tab("Explore", systemImage: "magnifyingglass", value: AppTab.explore) {
+                ExploreTab()
+            }
 
-            ProfileTab()
-                .tabItem { Label("Profile", systemImage: "person.crop.circle") }
-                .tag(AppTab.profile)
+            Tab("Profile", systemImage: "person.crop.circle", value: AppTab.profile) {
+                HomeTab()
+            }
         }
+//        .unsafeConditionalModifier {
+//            if #available(iOS 26, *) {
+//                $0.tabBarMinimizeBehavior(.onScrollDown)
+//            }
+//        }
         .tint(.white)
         .preferredColorScheme(.dark)
         .environment(appNav)

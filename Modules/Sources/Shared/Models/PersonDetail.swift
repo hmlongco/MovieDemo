@@ -27,7 +27,6 @@ public struct PersonDetail: Decodable, Identifiable, Equatable, Sendable {
     }
 }
 
-#if DEBUG
 public extension PersonDetail {
     static var mock1: PersonDetail {
         PersonDetail(
@@ -43,4 +42,3 @@ public extension PersonDetail {
         )
     }
 }
-#endif

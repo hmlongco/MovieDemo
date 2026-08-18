@@ -33,7 +33,7 @@ struct PersonDetailView: View {
         }
         .background(Color(hex: "0A0A0A").ignoresSafeArea())
         .scrollIndicators(.hidden)
-        .navigationTitle("Cast")
+        .navigationTitle("Cast/Credits")
     }
 }
 

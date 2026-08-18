@@ -52,6 +52,7 @@ public struct ExpandableText: View {
                         }
                     }
             }
+            .disabled(isExpanded)
 
             Button(isExpanded ? "Less" : "More", action: toggleExpanded)
                 .font(.system(size: 13, weight: .medium))
