@@ -3,7 +3,7 @@ import SwiftUI
 public struct SectionHeader: View {
     private let title: String
     
-    public init(title: String) {
+    public init(_ title: String) {
         self.title = title
     }
 

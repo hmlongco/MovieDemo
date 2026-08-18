@@ -7,7 +7,7 @@ struct PersonBiographySection: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            SectionHeader(title: "Biography")
+            SectionHeader("Biography")
             ExpandableText(biography)
         }
     }

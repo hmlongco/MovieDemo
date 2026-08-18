@@ -7,7 +7,7 @@ struct PersonFilmographySection: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            SectionHeader(title: "Filmography")
+            SectionHeader("Filmography")
             VStack(spacing: 12) {
                 ForEach(credits) { credit in
                     PersonFilmographyRow(credit: credit)

@@ -11,7 +11,8 @@ struct HomeTopRatedSection: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            SectionHeader(title: "Top Rated")
+            SectionHeader("Top Rated")
+                .padding(.horizontal, 16)
 
             switch viewModel.state {
             case .loaded(let movies) where !movies.isEmpty:

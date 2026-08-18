@@ -24,7 +24,7 @@ public struct AppView: View {
             }
 
             Tab("Profile", systemImage: "person.crop.circle", value: AppTab.profile) {
-                HomeTab()
+                ProfileTab()
             }
         }
 //        .unsafeConditionalModifier {

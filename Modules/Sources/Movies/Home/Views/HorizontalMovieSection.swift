@@ -16,7 +16,7 @@ struct HorizontalMovieSection<CardView: View>: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
-                SectionHeader(title: title)
+                SectionHeader(title)
                 Spacer()
                 Button(action: onSeeAll) {
                     Text(actionTitle)

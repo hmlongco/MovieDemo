@@ -112,7 +112,7 @@ struct MovieDetailView: View {
                 // Overview
                 if !detail.overview.isEmpty {
                     VStack(alignment: .leading, spacing: 8) {
-                        SectionHeader(title: "Storyline")
+                        SectionHeader("Storyline")
                         ExpandableText(detail.overview)
                     }
                 }
@@ -147,7 +147,7 @@ struct MovieDetailView: View {
         switch viewModel.castsState {
         case .loaded(let cast) where !cast.isEmpty || director != nil:
             VStack(alignment: .leading, spacing: 12) {
-                SectionHeader(title: "Cast/Credits")
+                SectionHeader("Cast/Credits")
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 12) {
                          ForEach(cast.prefix(10)) { member in
@@ -179,7 +179,7 @@ struct MovieDetailView: View {
 
     private func similarSection(movies: [Movie]) -> some View {
         VStack(alignment: .leading, spacing: 12) {
-            SectionHeader(title: "More Like This")
+            SectionHeader("More Like This")
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 10) {
                     ForEach(movies.prefix(10)) { movie in

@@ -160,7 +160,7 @@ public struct ExploreView: View {
 
     private var genresSection: some View {
         VStack(alignment: .leading, spacing: 14) {
-            SectionTitle(title: "Genres")
+            SectionHeader("Genres")
 
             LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 10) {
                 ForEach(viewModel.genres) { genre in
@@ -168,16 +168,17 @@ public struct ExploreView: View {
                         .onTapGesture { navigate(to: genre) }
                 }
             }
-            .padding(.horizontal, 16)
-        }
+         }
+        .padding(.horizontal, 16)
     }
 
     // MARK: - Collections
 
     private var collectionsSection: some View {
         VStack(alignment: .leading, spacing: 14) {
-            SectionTitle(title: "Collections")
-
+            SectionHeader("Collections")
+                .padding(.horizontal, 16)
+            
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 12) {
                     ForEach(viewModel.collections) { collection in
@@ -196,7 +197,7 @@ public struct ExploreView: View {
 
     private var arrivalsSection: some View {
         VStack(alignment: .leading, spacing: 14) {
-            SectionTitle(title: "New Arrivals")
+            SectionHeader("New Arrivals")
 
             VStack(spacing: 0) {
                 ForEach(viewModel.arrivals) { arrival in
@@ -207,8 +208,8 @@ public struct ExploreView: View {
                     Divider().background(Color.white.opacity(0.07))
                 }
             }
-            .padding(.horizontal, 16)
         }
+        .padding(.horizontal, 16)
     }
 
     // MARK: - Navigation Helper
@@ -276,16 +277,6 @@ private struct SearchResultRow: View {
 }
 
 // MARK: - Supporting Views
-
-private struct SectionTitle: View {
-    let title: String
-    var body: some View {
-        Text(title)
-            .foregroundStyle(.white)
-            .font(.system(size: 20, weight: .bold))
-            .padding(.horizontal, 16)
-    }
-}
 
 private struct ExploreGenreCard: View {
     let genre: ExploreGenre

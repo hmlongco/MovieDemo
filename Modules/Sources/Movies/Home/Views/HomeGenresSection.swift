@@ -12,7 +12,8 @@ struct HomeGenresSection: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            SectionHeader(title: "Genres")
+            SectionHeader("Genres")
+                .padding(.horizontal, 16)
 
             switch viewModel.state {
             case .loaded(let genres) where !genres.isEmpty:
