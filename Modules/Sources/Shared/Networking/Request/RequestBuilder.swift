@@ -7,7 +7,7 @@ public final class RequestBuilder {
         self.configuration = configuration
     }
     
-    public func build(from endpoint: Endpoint) throws -> URLRequest {
+    public func build(from endpoint: any Endpoint) throws -> URLRequest {
         // 1. Construct URL
         guard var components = URLComponents(url: configuration.baseURL, resolvingAgainstBaseURL: true) else {
             throw NetworkError.invalidURL
@@ -34,12 +34,8 @@ public final class RequestBuilder {
 
         // 3. Encode Body
         if let body = endpoint.body {
-            do {
-                request.httpBody = body
-                request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-            } catch {
-                throw NetworkError.serializationError(error)
-            }
+            request.httpBody = body
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         }
 
         // 4. Add Headers

@@ -27,7 +27,7 @@ public final class StandardNetworkClient: NetworkClient, @unchecked Sendable {
 
     // MARK: - Request
 
-    public func request(_ endpoint: Endpoint) async throws -> (Data?, HTTPURLResponse?) {
+    public func request(_ endpoint: any Endpoint) async throws -> (Data?, HTTPURLResponse?) {
         if let data: Data = try mock(for: endpoint) {
             return (data, nil)
         }
@@ -48,7 +48,7 @@ public final class StandardNetworkClient: NetworkClient, @unchecked Sendable {
                 throw NetworkError.invalidResponse
             }
 
-            let status = httpResponse.statusCode ?? 999
+            let status = httpResponse.statusCode
             print("\(status): \(path)")
 
             return (data, httpResponse)
@@ -58,7 +58,7 @@ public final class StandardNetworkClient: NetworkClient, @unchecked Sendable {
         }
     }
 
-    public func request<T: NetworkResult>(_ endpoint: Endpoint) async throws -> T {
+    public func request<T: NetworkResult>(_ endpoint: any Endpoint) async throws -> T {
         if let mock: T = try mock(for: endpoint) {
             return mock
         }

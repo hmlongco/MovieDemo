@@ -8,7 +8,7 @@ public protocol AuthenticationServices: Sendable {
 }
 
 public extension AuthenticationServices {
-    public var isAuthenticated: Bool {
+    var isAuthenticated: Bool {
         authenticatedUser != nil
     }
 }
