@@ -9,6 +9,7 @@ public struct ExpandableText: View {
     private let lineLimit: Int
     private let lineSpacing: CGFloat
 
+    @Environment(\.sceneGeometry) var geo
     @State private var isExpanded = false
 
     public init(
@@ -28,18 +29,21 @@ public struct ExpandableText: View {
     }
 
     public var body: some View {
-        VStack(alignment: .leading, spacing: isExpanded ? 8 : 0) {
+        if geo.size.width > 500 {
+            textView()
+        } else {
+            expansionView()
+        }
+    }
+
+    @ViewBuilder func expansionView() -> some View {
+       VStack(alignment: .leading, spacing: isExpanded ? 8 : 0) {
             Button {
                 if !isExpanded {
                     isExpanded.toggle()
                 }
             } label: {
-                Text(text)
-                    .foregroundStyle(textColor)
-                    .font(font)
-                    .lineSpacing(lineSpacing)
-                    .lineLimit(isExpanded ? nil : lineLimit)
-                    .multilineTextAlignment(.leading)
+                textView()
                     .overlay(alignment: .bottom) {
                         if !isExpanded {
                             LinearGradient(
@@ -59,7 +63,16 @@ public struct ExpandableText: View {
                 .foregroundStyle(.white)
                 .offset(y: isExpanded ? 0 : -10)
         }
-        .animation(.easeInOut, value: isExpanded)
+       .animation(.easeInOut, value: isExpanded)
+    }
+
+    @ViewBuilder func textView() -> some View {
+        Text(text)
+            .foregroundStyle(textColor)
+            .font(font)
+            .lineSpacing(lineSpacing)
+            .lineLimit(isExpanded ? nil : lineLimit)
+            .multilineTextAlignment(.leading)
     }
 
     private func toggleExpanded() {

@@ -82,7 +82,6 @@ struct MovieDetailView: View {
                     VStack(alignment: .leading, spacing: 8) {
                         SectionHeader("Storyline")
                         ExpandableText(detail.overview)
-                            .padding(.leading, geo.safeAreaInsets.leading)
                             .padding(.trailing, geo.safeAreaInsets.trailing)
                     }
                 }
