@@ -12,54 +12,29 @@ struct MovieDetailView: View {
     @Environment(\.navigator) private var navigator
     @Environment(\.sceneGeometry) private var geo
 
-    @State private var scrollOffset: CGFloat = 0
     private let heroHeight: CGFloat = 520
 
     var body: some View {
         ScrollView {
             VStack(spacing: 0) {
-                GeometryReader { geo in
-                    let offset = geo.frame(in: .named("scroll")).minY
-                    Color.clear
-                        .preference(key: ScrollOffsetKey.self, value: offset)
-                        .frame(height: 0)
-                }
-                .frame(height: 0)
-
-                Group {
-                    switch viewModel.detailState {
-                    case .loaded(let detail):
-                        VStack(spacing: 0) {
-                            // The placeholder keeps the scroll content at the safe area width, while the hero
-                            // overflows into the trailing inset (e.g. the iPhone Duo's system column).
-                            Color.clear
-                                .frame(height: heroHeight)
-                                .overlay(alignment: .leading) {
-                                    HeroCard(movie: detail, width: geo.size.width, height: heroHeight)
-                                }
-
-                            detailContent
-                        }
-
-                    default:
-                        MovieDetailSkeletonView()
-                            .shimmer()
+                switch viewModel.detailState {
+                case .loaded(let detail):
+                    VStack(spacing: 0) {
+                        HeroCard(movie: detail, width: geo.size.width, height: heroHeight)
+                        detailContent
                     }
+
+                default:
+                    MovieDetailSkeletonView()
+                        .shimmer()
                 }
             }
+            .padding(.bottom, 100)
         }
         .background(Color(hex: "0A0A0A").ignoresSafeArea())
-        .coordinateSpace(name: "scroll")
-        .onPreferenceChange(ScrollOffsetKey.self) { scrollOffset = $0 }
         .scrollIndicators(.hidden)
         .ignoresSafeArea(edges: .top)
-        .unsafeConditionalModifier {
-            if #available(iOS 27, *) {
-                $0.ignoresSafeArea(edges: .horizontal, alignment: .leading)
-            } else {
-                $0.ignoresSafeArea(edges: .horizontal)
-            }
-        }
+        .ignoresSafeArea(edges: .horizontal)
         .task {
             await viewModel.load(movieId: movieId)
         }
@@ -68,22 +43,18 @@ struct MovieDetailView: View {
     // MARK: - Hero Image
 
     private var heroImage: some View {
-        GeometryReader { geo in
-            let offset = max(0, scrollOffset)
-            RemoteImageView(url: viewModel.detailState.value?.backdropURL ?? viewModel.detailState.value?.posterURL)
-                .frame(width: geo.size.width, height: heroHeight + max(0, -scrollOffset))
-                .clipped()
-                .offset(y: offset > 0 ? -offset / 2 : 0)
-        }
-        .frame(height: heroHeight)
-        .overlay(alignment: .bottom) {
-            LinearGradient(
-                colors: [.clear, Color(hex: "0A0A0A")],
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            .frame(height: 100)
-        }
+        RemoteImageView(url: viewModel.detailState.value?.backdropURL ?? viewModel.detailState.value?.posterURL)
+            .frame(width: geo.size.width, height: heroHeight)
+            .clipped()
+            .frame(height: heroHeight)
+            .overlay(alignment: .bottom) {
+                LinearGradient(
+                    colors: [.clear, Color(hex: "0A0A0A")],
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+                .frame(height: 100)
+            }
     }
 
     // MARK: - Detail Content
@@ -249,15 +220,6 @@ private struct MovieDetailSkeletonView: View {
         }
         .padding(.horizontal, 16)
         .shimmer()
-    }
-}
-
-// MARK: - Preference Key
-
-private struct ScrollOffsetKey: PreferenceKey {
-    nonisolated(unsafe) static var defaultValue: CGFloat = 0
-    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
-        value = nextValue()
     }
 }
 

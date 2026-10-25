@@ -8,7 +8,6 @@ public struct HomeView: View {
 
     @Environment(\.navigator) private var navigator
 
-    @State private var scrollOffset: CGFloat = 0
     @State private var refreshID:    Int     = 0
     @State private var allGenres:    [Genre] = []
 
@@ -17,14 +16,6 @@ public struct HomeView: View {
     public var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
-                GeometryReader { geo in
-                    let offset = geo.frame(in: .named("homeScroll")).minY
-                    Color.clear
-                        .preference(key: HomeScrollOffsetKey.self, value: offset)
-                        .frame(height: 0)
-                }
-                .frame(height: 0)
-
                 HomeHeroSection(refreshID: refreshID) { movie in
                     navigateToDetail(movie: movie)
                 }
@@ -50,8 +41,6 @@ public struct HomeView: View {
             .padding(.bottom, 100)
         }
         .background(Color(hex: "0A0A0A").ignoresSafeArea())
-        .coordinateSpace(name: "homeScroll")
-        .onPreferenceChange(HomeScrollOffsetKey.self) { scrollOffset = $0 }
         .scrollIndicators(.hidden)
         .ignoresSafeArea(edges: .top)
         .refreshable { refreshID += 1 }
@@ -81,16 +70,6 @@ public struct HomeView: View {
         ))
     }
 }
-
-// MARK: - Preference Key
-
-private struct HomeScrollOffsetKey: PreferenceKey {
-    nonisolated(unsafe) static var defaultValue: CGFloat = 0
-    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
-        value = nextValue()
-    }
-}
-
 
 #if DEBUG
 #Preview {

@@ -21,7 +21,7 @@ public struct HeroCard: View {
             )
             .frame(height: height / 2)
         }
-        .frame(width: width, height: height)
+        .frame(maxWidth: width, minHeight: height, maxHeight: height)
         .overlay(alignment: .bottomLeading) {
             VStack(alignment: .leading, spacing: 8) {
                 Text(movie.title)
