@@ -7,7 +7,7 @@
       "location" : "https://github.com/hmlongco/Factory",
       "state" : {
         "branch" : "main",
-        "revision" : "e7b123f191ff1cead0a6992f96099fde310a3284"
+        "revision" : "aa8596de32192b1b7f6c8c2f7f7f073e5c93658f"
       }
     },
     {
@@ -16,7 +16,7 @@
       "location" : "https://github.com/hmlongco/Navigator",
       "state" : {
         "branch" : "main",
-        "revision" : "ceb24f200d8fb2a9c49d2add2b93b77057b145cc"
+        "revision" : "2bf342cf1d1056af76ad4bfcfebf5639d481c326"
       }
     },
     {
@@ -25,7 +25,7 @@
       "location" : "https://github.com/hmlongco/Runes",
       "state" : {
         "branch" : "main",
-        "revision" : "9f358f36bada836b0dcde5b36cb0826a4f3c8dce"
+        "revision" : "81752ac670131b9166350d832787413d323f7716"
       }
     }
   ],

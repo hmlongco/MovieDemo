@@ -8,21 +8,21 @@ struct HomeHeroSection: View {
     let refreshID: Int
     let onMovieTap: (Movie) -> Void
 
+    @Environment(\.sceneGeometry) var geo
     @State private var viewModel = HomeHeroViewModel()
 
     var body: some View {
         Group {
             switch viewModel.state {
             case .loaded(let movies) where !movies.isEmpty:
-                GeometryReader { geo in
-                    TabView {
-                        ForEach(movies.prefix(5)) { movie in
-                            HeroCard(movie: movie, width: geo.size.width, height: 520)
-                                .onTapGesture { onMovieTap(movie) }
-                        }
+                TabView {
+                    ForEach(movies.prefix(5)) { movie in
+                        HeroCard(movie: movie, width: geo.size.width, height: 520)
+                            .onTapGesture { onMovieTap(movie) }
                     }
-                    .tabViewStyle(.page(indexDisplayMode: .always))
                 }
+                .tabViewStyle(.page(indexDisplayMode: .always))
+                .ignoresSafeArea(edges: .horizontal)
                 .frame(height: 520)
 
             default:
@@ -41,59 +41,6 @@ struct HomeHeroSection: View {
             }
         }
         .task(id: refreshID) { await viewModel.load() }
-    }
-}
-
-// MARK: - Hero Card
-
-private struct HeroCard: View {
-    let movie: Movie
-    let width: CGFloat
-    let height: CGFloat
-
-    var body: some View {
-        ZStack(alignment: .bottomLeading) {
-            RemoteImageView(url: movie.backdropURL ?? movie.posterURL)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .clipped()
-
-            LinearGradient(
-                colors: [.clear, Color(hex: "0A0A0A").opacity(0.8), Color(hex: "0A0A0A")],
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            .frame(height: height / 2)
-        }
-        .frame(width: width, height: height)
-        .overlay(alignment: .bottomLeading) {
-            VStack(alignment: .leading, spacing: 8) {
-                Text(movie.title)
-                    .foregroundStyle(.white)
-                    .font(.system(size: 28, weight: .bold))
-                    .lineLimit(2)
-
-                HStack(spacing: 8) {
-                    if let date = movie.releaseDate {
-                        Text(date.prefix(4))
-                            .foregroundStyle(Color(hex: "A3A3A3"))
-                            .font(.system(size: 13))
-                    }
-                    HStack(spacing: 4) {
-                        Image(systemName: "star.fill")
-                            .foregroundStyle(.yellow)
-                            .font(.system(size: 11))
-                        Text(String(format: "%.1f", movie.voteAverage))
-                            .foregroundStyle(.white)
-                            .font(.system(size: 13, weight: .medium))
-                    }
-                    Spacer()
-                    StarRatingRepositoryView(movieId: movie.id)
-                }
-            }
-            .padding(.horizontal, 16)
-            .padding(.bottom, 48)
-        }
-        .clipped()
     }
 }
 

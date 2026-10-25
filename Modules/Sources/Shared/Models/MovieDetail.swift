@@ -1,6 +1,6 @@
 import Foundation
 
-public struct MovieDetail: Decodable, Identifiable, Equatable, Sendable {
+public struct MovieDetail: MovieSummary, Decodable {
     public let id: Int
     public let title: String
     public let overview: String

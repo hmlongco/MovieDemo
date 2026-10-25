@@ -2,7 +2,29 @@ import Foundation
 
 // https://developer.themoviedb.org/reference/getting-started
 
-public struct Movie: Codable, Identifiable, Equatable, Sendable {
+public protocol MovieSummary: Identifiable, Equatable, Sendable {
+    var id: Int { get }
+    var title: String { get }
+    var overview: String { get }
+    var releaseDate: String? { get }
+    var posterPath: String? { get }
+    var backdropPath: String? { get }
+    var voteAverage: Double { get }
+}
+
+extension MovieSummary {
+    public var posterURL: URL? {
+        guard let path = posterPath else { return nil }
+        return URL(string: "https://image.tmdb.org/t/p/w500\(path)")
+    }
+
+    public var backdropURL: URL? {
+        guard let path = backdropPath else { return nil }
+        return URL(string: "https://image.tmdb.org/t/p/w780\(path)")
+    }
+}
+
+public struct Movie: MovieSummary, Codable {
     public let id: Int
     public let title: String
     public let overview: String
@@ -22,16 +44,6 @@ public struct Movie: Codable, Identifiable, Equatable, Sendable {
         case backdropPath = "backdrop_path"
         case voteAverage = "vote_average"
         case genreIds = "genre_ids"
-    }
-    
-    public var posterURL: URL? {
-        guard let path = posterPath else { return nil }
-        return URL(string: "https://image.tmdb.org/t/p/w500\(path)")
-    }
-    
-    public var backdropURL: URL? {
-        guard let path = backdropPath else { return nil }
-        return URL(string: "https://image.tmdb.org/t/p/w780\(path)")
     }
     
     public static var placeholder: Movie {

@@ -10,9 +10,10 @@ struct MovieDetailView: View {
     let movieId: Int
     @State private var viewModel = MovieDetailViewModel()
     @Environment(\.navigator) private var navigator
+    @Environment(\.sceneGeometry) private var geo
 
     @State private var scrollOffset: CGFloat = 0
-    private let heroHeight: CGFloat = 480
+    private let heroHeight: CGFloat = 520
 
     var body: some View {
         ScrollView {
@@ -25,8 +26,26 @@ struct MovieDetailView: View {
                 }
                 .frame(height: 0)
 
-                heroImage
-                detailContent
+                Group {
+                    switch viewModel.detailState {
+                    case .loaded(let detail):
+                        VStack(spacing: 0) {
+                            // The placeholder keeps the scroll content at the safe area width, while the hero
+                            // overflows into the trailing inset (e.g. the iPhone Duo's system column).
+                            Color.clear
+                                .frame(height: heroHeight)
+                                .overlay(alignment: .leading) {
+                                    HeroCard(movie: detail, width: geo.size.width, height: heroHeight)
+                                }
+
+                            detailContent
+                        }
+
+                    default:
+                        MovieDetailSkeletonView()
+                            .shimmer()
+                    }
+                }
             }
         }
         .background(Color(hex: "0A0A0A").ignoresSafeArea())
@@ -34,6 +53,13 @@ struct MovieDetailView: View {
         .onPreferenceChange(ScrollOffsetKey.self) { scrollOffset = $0 }
         .scrollIndicators(.hidden)
         .ignoresSafeArea(edges: .top)
+        .unsafeConditionalModifier {
+            if #available(iOS 27, *) {
+                $0.ignoresSafeArea(edges: .horizontal, alignment: .leading)
+            } else {
+                $0.ignoresSafeArea(edges: .horizontal)
+            }
+        }
         .task {
             await viewModel.load(movieId: movieId)
         }
@@ -73,35 +99,6 @@ struct MovieDetailView: View {
             VStack(alignment: .leading, spacing: 24) {
                 // Title + Meta
                 VStack(alignment: .leading, spacing: 8) {
-                    Text(detail.title)
-                        .foregroundStyle(.white)
-                        .font(.system(size: 26, weight: .bold))
-
-                    HStack(spacing: 12) {
-                        if let date = detail.releaseDate {
-                            Text(date.prefix(4))
-                                .foregroundStyle(Color(hex: "A3A3A3"))
-                                .font(.system(size: 13))
-                        }
-                        if !detail.durationText.isEmpty {
-                            Text("•")
-                                .foregroundStyle(Color(hex: "525252"))
-                            Text(detail.durationText)
-                                .foregroundStyle(Color(hex: "A3A3A3"))
-                                .font(.system(size: 13))
-                        }
-                        HStack(spacing: 4) {
-                            Image(systemName: "star.fill")
-                                .foregroundStyle(.yellow)
-                                .font(.system(size: 11))
-                            Text(String(format: "%.1f", detail.voteAverage))
-                                .foregroundStyle(.white)
-                                .font(.system(size: 13, weight: .medium))
-                        }
-                        Spacer()
-                        StarRatingRepositoryView(movieId: movieId)
-                    }
-
                     if !detail.genreText.isEmpty {
                         Text(detail.genreText)
                             .foregroundStyle(Color(hex: "737373"))
@@ -114,6 +111,8 @@ struct MovieDetailView: View {
                     VStack(alignment: .leading, spacing: 8) {
                         SectionHeader("Storyline")
                         ExpandableText(detail.overview)
+                            .padding(.leading, geo.safeAreaInsets.leading)
+                            .padding(.trailing, geo.safeAreaInsets.trailing)
                     }
                 }
 

@@ -27,15 +27,11 @@ public struct AppView: View {
                 ProfileTab()
             }
         }
-//        .unsafeConditionalModifier {
-//            if #available(iOS 26, *) {
-//                $0.tabBarMinimizeBehavior(.onScrollDown)
-//            }
-//        }
         .tint(.white)
         .preferredColorScheme(.dark)
         .environment(appNav)
         .environment(\.modelContext, dependency(\.modelContext))
+        .sceneGeometryRoot()
     }
 }
 

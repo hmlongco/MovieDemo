@@ -6,7 +6,7 @@ import Shared
 
 public struct HomeView: View {
 
-    @Environment(\.navigator)       private var navigator
+    @Environment(\.navigator) private var navigator
 
     @State private var scrollOffset: CGFloat = 0
     @State private var refreshID:    Int     = 0
