@@ -15,15 +15,25 @@ struct HomeHeroSection: View {
         Group {
             switch viewModel.state {
             case .loaded(let movies) where !movies.isEmpty:
-                TabView {
-                    ForEach(movies.prefix(5)) { movie in
-                        HeroCard(movie: movie, width: geo.size.width, height: 520)
-                            .onTapGesture { onMovieTap(movie) }
+                TabView(selection: $viewModel.selectedIndex) {
+                    ForEach(movies.prefix(HomeHeroViewModel.maxPages).indices, id: \.self) { index in
+                        HeroCard(movie: movies[index], width: geo.size.width, height: 520)
+                            .onTapGesture { onMovieTap(movies[index]) }
+                            .tag(index)
                     }
                 }
                 .tabViewStyle(.page(indexDisplayMode: .always))
                 .ignoresSafeArea(edges: .horizontal)
                 .frame(height: 520)
+                .overlay(alignment: .leading) {
+                    // Sized to the full scene width so the buttons sit on the card's edges, not the safe area's.
+                    HeroNavigationButtons(
+                        isEnabled: viewModel.canNavigate,
+                        showPrevious: { withAnimation { viewModel.showPrevious() } },
+                        showNext: { withAnimation { viewModel.showNext() } }
+                    )
+                    .frame(width: geo.size.width)
+                }
 
             default:
                 ZStack(alignment: .bottomLeading) {
